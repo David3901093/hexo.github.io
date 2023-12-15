@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="keywords" content="hexo, autumn" />
+    <title>
+        秋日诗意
+    </title>
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
+     
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+
+    <!-- highlight -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
+    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
+
+    <script>
+        infiniteScroll()
+
+        window.addEventListener('DOMContentLoaded', function () {
+            const [
+                mainTitle,
+                mobileMenu,
+                mobileMainTitle,
+                mobileMenuBtn,
+                ipadMenuBtn,
+                aside,
+                closeBtn,
+            ] = getEle(
+                '#main-title',
+                '.mobile-menu',
+                '.mobile-menu h3',
+                '.mobile-menu button',
+                '.ipad-menu',
+                'aside',
+                'aside .close',
+            )
+            const io = new IntersectionObserver(entries => {
+                if (entries[0].intersectionRatio <= 0) {
+                    mobileMainTitle.classList.remove('invisibile')
+                } else {
+                    mobileMainTitle.classList.add('invisibile')
+                }
+            })
+            io.observe(mainTitle)
+
+            clickToggleAside(mobileMenuBtn)
+            clickToggleAside(ipadMenuBtn)
+            clickToggleAside(closeBtn, false)
+
+            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
+            if (isMenuVisible) document.body.style.background = 'none'
+
+            function getEle(...args) {
+                return args.map(arg => document.querySelector(arg))
+            }
+
+            function clickToggleAside(btn, show = true) {
+                btn.addEventListener('click', function () {
+                    if (show) {
+                        aside.style.display = 'block'
+                    } else {
+                        aside.style.display = 'none'
+                    }
+                })
+            }
+        })
+    </script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+    <div class="container">
+        <header class="header">
+    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
+        <h3 class="invisibile">
+            <a href="/hexo.github.io/" class="logo">
+                秋日诗意
+            </a>
+        </h3>
+        <button class="menu">menu</button>
+    </nav>
+
+    <button class="ipad-menu menu">menu</button>
+
+    <h1 class="title" id="main-title">
+        <a href="/hexo.github.io/" class="logo">
+            秋日诗意
+        </a>
+    </h1>
+    <h2 class="desc">
+        一个程序员的文字空间
+    </h2>
+
+    <div class="links">
+        <ul>
+            
+            <li>
+                <a target="_blank" rel="noopener" href="https://github.com/FrontendSophie">
+                    Github
+                </a>
+            </li>
+            
+            <li>
+                <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/frontendsophie/">
+                    LinkedIn
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</header>
+        <main class="main">
+            <article class="post">
+    
+    
+    <h4 class="post-cat">
+        <a href="/hexo.github.io/categories/Python/">
+            Python
+        </a>
+    </h4>
+    
+    
+    <h2 class="post-title">
+        Python入门
+    </h2>
+    <ul class="post-date">
+        <li>
+            2023-12-14
+        </li>
+        <li>
+            David Ge
+        </li>
+    </ul>
+    <div class="post-content">
+        <h1 id="day00：计算机基础知识详解"><a href="#day00：计算机基础知识详解" class="headerlink" title="day00：计算机基础知识详解"></a>day00：计算机基础知识详解</h1><p>人&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;编程语言&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》计算机<br>            去包子店<br>            付款<br>            把包子拿回来</p>
+<pre><code>    1、cpu详解
+        cpu的分类与指令集
+        x86-64（*****）
+            cpu具有向下兼容性
+                64的cpu既能运行32位的程序也能运行64位的程序
+
+        内核态与用户态（*****）
+            代表cpu的两种工作状态
+                1、内核态：运行的程序是操作系统，可以操作计算机硬件
+                2、用户态：运行的程序是应用程序，不能操作计算机硬件
+
+            内核态与用户态的转换
+                应用程序的运行必然涉及到计算机硬件的操作，那就必须有用户态切换到
+                内核态下才能实现，所以计算机工作时在频繁发生内核态与用户态的转换
+        多线程与多核芯片
+            2核4线程：
+                2核代表有两个cpu，4线程指的是每个cpu都有两个线程=》假4核
+
+            4核8线程
+                4核代表有4个cpu，8线程指的是每个cpu都有两个线程=》假8核
+
+
+    2、存储器
+        RAM：内存
+        ROM：“只读内存”
+            存放计算机厂商写死计算机上的一段核心程序=》BIOS
+        CMOS：存取速度慢，断电数据丢失，耗电量极低
+
+        硬盘：
+            机械硬盘:磁盘
+                磁道：一圈数据，对应着一串二进制（1bit代表一个二进制位）
+                    8bit比特位=1Bytes字节
+                    1024Bytes=1KB
+                    1024KB=1MB
+                    1024MB=1GB
+                    1024GB=1TB
+                    1024TB=1PB
+
+                    200G=200*1000*1000B
+
+                扇区：
+                    一个扇区通过为512Bytes
+                    站在硬盘的解读，一次性读写数据的最小单为为扇区
+
+                    操作系统一次性读写的单位是一个block块=》8扇区的大小=4096Bytes
+
+
+                柱面
+
+            固态硬盘
+        IO延迟（*****）
+            7200转/min
+            120转/s
+            1/120转/s=转一圈需要花费8ms
+
+            平均寻道时间：机械手臂转到数据所在磁道需要花费的时间，受限于物理工艺水平，目前机械硬盘可以达到的是5ms
+
+            平均延迟时间：转半圈需要花费4ms，受限于硬盘的转速
+
+            IO延迟=平均寻道时间+平均延迟时间
+
+            优化程序运行效率的一个核心法则：能从内存取数据，就不要从硬盘取
+
+
+        虚拟内存
+
+        IO设备=设备的控制+设备本身
+
+    3、总线
+
+    4、操作系统的启动流程（*****）
+
+        BIOS介绍：
+
+            BIOS：Basic Input Output System
+            BIOS被写入ROM设备
+
+
+        裸机：
+            cpu
+            ROM：充当内存，存放BIOS系统
+            CMOS：充当硬盘
+
+
+        操作系统的启动流程（*****）
+            1.计算机加电
+
+            2.BIOS开始运行，检测硬件：cpu、内存、硬盘等
+
+            3.BIOS读取CMOS存储器中的参数，选择启动设备
+
+            4.从启动设备上读取第一个扇区的内容（MBR主引导记录512字节，前446为引导信息，后64为分区信息，最后两个为标志位）
+
+            5.根据分区信息读入bootloader启动装载模块，启动操作系统
+
+            6.然后操作系统询问BIOS，以获得配置信息。对于每种设备，系统会检查其设备驱动程序是否存在，如果没有，系统则会要求用户按照设备驱动程序。一旦有了全部的设备驱动程序，操作系统就将它们调入内核
+
+
+
+        BIOS
+            1、存有win10系统的光盘、u盘、移动硬盘：无密码
+            2、本地硬盘上的win7系统：密码
+
+        应用程序的启动流程（*****）
+            1、双击exe快捷方式--》exe文件的绝对路径，就是在告诉操作系统
+                说：我有一个应用程序要执行，应用程序的文件路径是（exe文件的绝对路径）
+
+            2、操作系统会根据文件路径找到exe程序在硬盘的位置，控制其代码从硬盘加载到内存
+
+            3、然后控制cpu从内存中读取刚刚读入内存的应用程序的代码执行，应用程序完成启动
+</code></pre>
+
+    </div>
+</article>
+
+        </main>
+        <aside class="aside">
+            <div class="close"></div>
+            <section class="aside-section">
+                
+    <h1>Categories</h1>
+
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a></li></ul>
+
+            </section>
+            <section class="aside-section">
+                
+    <h1>Archives</h1>
+
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/">2023</a></li></ul>
+
+
+            </section>
+            <section class="aside-section tag">
+                
+    <h1>Tags</h1>
+
+    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+            </section>
+        </aside>
+    </div>
+</body>
+
+</html>
