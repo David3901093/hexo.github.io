@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Python入门 | Hexo</title>
+  <meta name="description" content="计算机基础知识详解人&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;编程语言&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》计算机            去包子店            付款            把包子拿回来     1、cpu详解         cpu的分类与指令集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python入门">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="计算机基础知识详解人&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;编程语言&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》计算机            去包子店            付款            把包子拿回来     1、cpu详解         cpu的分类与指令集">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-15T09:11:23.378Z">
+<meta property="article:modified_time" content="2023-12-15T09:12:40.617Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 13px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 13px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/%E6%9C%80%E5%90%8E%E7%9A%84%E5%8F%AE%E5%92%9B/" class="title">最后的叮咛</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T01:04:11.471Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/" class="title">Python入门</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-15T09:11:23.378Z" itemprop="datePublished">2023-12-15</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">计算机基础知识详解</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-01.Python入门" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python入门
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/" class="article-date">
+	  <time datetime="2023-12-15T09:11:23.378Z" itemprop="datePublished">2023-12-15</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="计算机基础知识详解"><a href="#计算机基础知识详解" class="headerlink" title="计算机基础知识详解"></a>计算机基础知识详解</h1><p>人&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;编程语言&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》计算机<br>            去包子店<br>            付款<br>            把包子拿回来</p>
+<pre><code>    1、cpu详解
+        cpu的分类与指令集
+        x86-64（*****）
+            cpu具有向下兼容性
+                64的cpu既能运行32位的程序也能运行64位的程序
+
+        内核态与用户态（*****）
+            代表cpu的两种工作状态
+                1、内核态：运行的程序是操作系统，可以操作计算机硬件
+                2、用户态：运行的程序是应用程序，不能操作计算机硬件
+
+            内核态与用户态的转换
+                应用程序的运行必然涉及到计算机硬件的操作，那就必须有用户态切换到
+                内核态下才能实现，所以计算机工作时在频繁发生内核态与用户态的转换
+        多线程与多核芯片
+            2核4线程：
+                2核代表有两个cpu，4线程指的是每个cpu都有两个线程=》假4核
+
+            4核8线程
+                4核代表有4个cpu，8线程指的是每个cpu都有两个线程=》假8核
+
+
+    2、存储器
+        RAM：内存
+        ROM：“只读内存”
+            存放计算机厂商写死计算机上的一段核心程序=》BIOS
+        CMOS：存取速度慢，断电数据丢失，耗电量极低
+
+        硬盘：
+            机械硬盘:磁盘
+                磁道：一圈数据，对应着一串二进制（1bit代表一个二进制位）
+                    8bit比特位=1Bytes字节
+                    1024Bytes=1KB
+                    1024KB=1MB
+                    1024MB=1GB
+                    1024GB=1TB
+                    1024TB=1PB
+
+                    200G=200*1000*1000B
+
+                扇区：
+                    一个扇区通过为512Bytes
+                    站在硬盘的解读，一次性读写数据的最小单为为扇区
+
+                    操作系统一次性读写的单位是一个block块=》8扇区的大小=4096Bytes
+
+
+                柱面
+
+            固态硬盘
+        IO延迟（*****）
+            7200转/min
+            120转/s
+            1/120转/s=转一圈需要花费8ms
+
+            平均寻道时间：机械手臂转到数据所在磁道需要花费的时间，受限于物理工艺水平，目前机械硬盘可以达到的是5ms
+
+            平均延迟时间：转半圈需要花费4ms，受限于硬盘的转速
+
+            IO延迟=平均寻道时间+平均延迟时间
+
+            优化程序运行效率的一个核心法则：能从内存取数据，就不要从硬盘取
+
+
+        虚拟内存
+
+        IO设备=设备的控制+设备本身
+
+    3、总线
+
+    4、操作系统的启动流程（*****）
+
+        BIOS介绍：
+
+            BIOS：Basic Input Output System
+            BIOS被写入ROM设备
+
+
+        裸机：
+            cpu
+            ROM：充当内存，存放BIOS系统
+            CMOS：充当硬盘
+
+
+        操作系统的启动流程（*****）
+            1.计算机加电
+
+            2.BIOS开始运行，检测硬件：cpu、内存、硬盘等
+
+            3.BIOS读取CMOS存储器中的参数，选择启动设备
+
+            4.从启动设备上读取第一个扇区的内容（MBR主引导记录512字节，前446为引导信息，后64为分区信息，最后两个为标志位）
+
+            5.根据分区信息读入bootloader启动装载模块，启动操作系统
+
+            6.然后操作系统询问BIOS，以获得配置信息。对于每种设备，系统会检查其设备驱动程序是否存在，如果没有，系统则会要求用户按照设备驱动程序。一旦有了全部的设备驱动程序，操作系统就将它们调入内核
+
+
+
+        BIOS
+            1、存有win10系统的光盘、u盘、移动硬盘：无密码
+            2、本地硬盘上的win7系统：密码
+
+        应用程序的启动流程（*****）
+            1、双击exe快捷方式--》exe文件的绝对路径，就是在告诉操作系统
+                说：我有一个应用程序要执行，应用程序的文件路径是（exe文件的绝对路径）
+
+            2、操作系统会根据文件路径找到exe程序在硬盘的位置，控制其代码从硬盘加载到内存
+
+            3、然后控制cpu从内存中读取刚刚读入内存的应用程序的代码执行，应用程序完成启动
+</code></pre>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/15/01.Python%E5%85%A5%E9%97%A8/" title="Python入门" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/15/01.Python入门/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/hexo.github.io/2023/12/18/%E6%9C%80%E5%90%8E%E7%9A%84%E5%8F%AE%E5%92%9B/" title="最后的叮咛"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
