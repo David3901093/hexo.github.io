@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Python函数高级 | Hexo</title>
+  <meta name="description" content="day05闭包函数—:大前提:闭包函数&#x3D;名称空间与作用域+函数嵌套+函数对象核心点:名字的查找关系是以函数定义阶段为准二:什么是闭包函数“闭”函数指的该函数是内嵌函数“包”函数指的该函数包含对外层函数作用域名字的引用（不是对全局作用域) 闭包函数(嵌套定义+名称空间+函数对象)123456789101112def f1():    x&#x3D;22222222222    def f2():">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python函数高级">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/18/day05/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="day05闭包函数—:大前提:闭包函数&#x3D;名称空间与作用域+函数嵌套+函数对象核心点:名字的查找关系是以函数定义阶段为准二:什么是闭包函数“闭”函数指的该函数是内嵌函数“包”函数指的该函数包含对外层函数作用域名字的引用（不是对全局作用域) 闭包函数(嵌套定义+名称空间+函数对象)123456789101112def f1():    x&#x3D;22222222222    def f2():">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-18T07:47:48.577Z">
+<meta property="article:modified_time" content="2023-12-18T08:07:49.248Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/18/day05/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day03/" class="title">容器(1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day02/" class="title">流程控制和容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#day05"><span class="toc-number">1.</span> <span class="toc-text">day05</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">闭包函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E5%87%BD%E6%95%B0-%E5%B5%8C%E5%A5%97%E5%AE%9A%E4%B9%89-%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.1.</span> <span class="toc-text">闭包函数(嵌套定义+名称空间+函数对象)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A0%E5%8A%A0%E5%A4%9A%E4%B8%AA%E8%A3%85%E9%A5%B0%E5%99%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">叠加多个装饰器流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BC%98%E7%BC%BA%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.1.</span> <span class="toc-text">6、迭代器优缺点总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">6.1 缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">6.2 缺点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lamdA%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.5.</span> <span class="toc-text">lamdA表达式</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-day05" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python函数高级
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/18/day05/" class="article-date">
+	  <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/18/day05/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.8k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="day05"><a href="#day05" class="headerlink" title="day05"></a>day05</h1><h2 id="闭包函数"><a href="#闭包函数" class="headerlink" title="闭包函数"></a>闭包函数</h2><p>—:大前提:<br>闭包函数&#x3D;名称空间与作用域+函数嵌套+函数对象<br>核心点:名字的查找关系是以函数定义阶段为准<br>二:什么是闭包函数<br>“闭”函数指的该函数是内嵌函数<br>“包”函数指的该函数包含对外层函数作用域名字的引用（不是对全局作用域)</p>
+<h3 id="闭包函数-嵌套定义-名称空间-函数对象"><a href="#闭包函数-嵌套定义-名称空间-函数对象" class="headerlink" title="闭包函数(嵌套定义+名称空间+函数对象)"></a>闭包函数(嵌套定义+名称空间+函数对象)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f1</span>():</span><br><span class="line">    x=<span class="number">22222222222</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f2</span>():</span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    f2()</span><br><span class="line">x=<span class="number">111111111</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bar</span>():</span><br><span class="line">    x=<span class="number">444444444444</span></span><br><span class="line">    f1()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span>():</span><br><span class="line">    x=<span class="number">2222222222222</span></span><br><span class="line">    bar()</span><br></pre></td></tr></table></figure>
+
+<p>函数对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">f1</span>():</span><br><span class="line">    x=<span class="number">22222222222</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f2</span>():</span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    <span class="keyword">return</span> f2<span class="comment"># 将f2函数作为对象返回</span></span><br><span class="line">f=f1()</span><br><span class="line"><span class="comment"># f2是一个闭包:通过f()可以调用f1内部的变量</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>在<code>Python</code>中，装饰器是一种高级语言特性，它可以用于修改现有函数或类的行为,在不改动这个函数的前提下，扩展这个函数的功能。比如计算函数耗时、给函数加缓存等。</p>
+<p>为何要用装饰器<br>    开放封闭原则<br>    开放:指的是对拓展功能是开放的<br>    封闭:指的是对修改源代码是封闭的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">由于语法糖@的限制，outter函数只能有一个参数，并且该参数只用来接收被装饰对象的内存地址</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">outter</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="comment"># func = 函数的内存地址</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        res=func(*args,**kwargs)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="comment"># @outter # index=outter(index) # index=&gt;wrapper</span></span><br><span class="line"><span class="meta">@outter </span><span class="comment"># outter(index)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="built_in">print</span>(x,y)</span><br><span class="line"></span><br><span class="line">偷梁换柱之后</span><br><span class="line">index的参数什么样子，wrapper的参数就应该什么样子</span><br><span class="line">index的返回值什么样子，wrapper的返回值就应该什么样子</span><br><span class="line">index的属性什么样子，wrapper的属性就应该什么样子==&gt;<span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>有参装饰器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">有参装饰器</span>(<span class="params">x,y,z</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">outter</span>(<span class="params">func</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> outter</span><br><span class="line"></span><br><span class="line"><span class="meta">@有参装饰器(<span class="params"><span class="number">1</span>,y=<span class="number">2</span>,z=<span class="number">3</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">被装饰对象</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="叠加多个装饰器流程"><a href="#叠加多个装饰器流程" class="headerlink" title="叠加多个装饰器流程"></a>叠加多个装饰器流程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 叠加多个装饰器的加载、运行分析</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deco1</span>(<span class="params">func1</span>): <span class="comment"># func1 = wrapper2的内存地址</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper1</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;正在运行===&gt;deco1.wrapper1&#x27;</span>)</span><br><span class="line">        res1=func1(*args,**kwargs)</span><br><span class="line">        <span class="keyword">return</span> res1</span><br><span class="line">    <span class="keyword">return</span> wrapper1</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deco2</span>(<span class="params">func2</span>): <span class="comment"># func2 = wrapper3的内存地址</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper2</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;正在运行===&gt;deco2.wrapper2&#x27;</span>)</span><br><span class="line">        res2=func2(*args,**kwargs)</span><br><span class="line">        <span class="keyword">return</span> res2</span><br><span class="line">    <span class="keyword">return</span> wrapper2</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deco3</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">outter3</span>(<span class="params">func3</span>): <span class="comment"># func3=被装饰对象index函数的内存地址</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">wrapper3</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;正在运行===&gt;deco3.outter3.wrapper3&#x27;</span>)</span><br><span class="line">            res3=func3(*args,**kwargs)</span><br><span class="line">            <span class="keyword">return</span> res3</span><br><span class="line">        <span class="keyword">return</span> wrapper3</span><br><span class="line">    <span class="keyword">return</span> outter3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载顺序自下而上(了解)</span></span><br><span class="line"><span class="meta">@deco1      </span><span class="comment"># index=deco1(wrapper2的内存地址)        ===&gt; index=wrapper1的内存地址</span></span><br><span class="line"><span class="meta">@deco2      </span><span class="comment"># index=deco2(wrapper3的内存地址)        ===&gt; index=wrapper2的内存地址</span></span><br><span class="line"><span class="meta">@deco3(<span class="params"><span class="number">111</span></span>) </span><span class="comment"># ===&gt;@outter3===&gt; index=outter3(index) ===&gt; index=wrapper3的内存地址</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;from index %s:%s&#x27;</span> %(x,y))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行顺序自上而下的，即wraper1-》wrapper2-》wrapper3</span></span><br><span class="line">index(<span class="number">1</span>,<span class="number">2</span>) <span class="comment"># wrapper1(1,2)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>1、什么是迭代器</p>
+<p>  迭代器指的是迭代取值的工具，迭代是一个重复的过程，每次重复  都是基于上一次的结果而继续的，单纯的重复并不是迭代</p>
+<p>2、为何要有迭代器</p>
+<p>  迭代器是用来迭代取值的工具，而涉及到把多个值循环取出来的类型  有：列表、字符串、元组、字典、集合、文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l=[<span class="string">&#x27;egon&#x27;</span>,<span class="string">&#x27;liu&#x27;</span>,<span class="string">&#x27;alex&#x27;</span>]</span><br><span class="line">i=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="built_in">len</span>(l):</span><br><span class="line">    <span class="built_in">print</span>(l[i])</span><br><span class="line">    i+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p> 上述迭代取值的方式只适用于有索引的数据类型：列表、字符串、元组</p>
+<p>  为了解决基于索引迭代器取值的局限性</p>
+<p>  python必须提供一种能够不依赖于索引的取值方式，这就是迭代器</p>
+<p>可迭代的对象：但凡内置有<code>__iter__</code>方法的都称之为可迭代的对象</p>
+<p>调用可迭代对象下的<code>__iter__</code>.  方法会将其转换成迭代器对象</p>
+<h3 id="6、迭代器优缺点总结"><a href="#6、迭代器优缺点总结" class="headerlink" title="6、迭代器优缺点总结"></a>6、迭代器优缺点总结</h3><h4 id="6-1-缺点："><a href="#6-1-缺点：" class="headerlink" title="6.1 缺点："></a>6.1 缺点：</h4><p>I、为序列和非序列类型提供了一种统一的迭代取值方式。</p>
+<p>II、惰性计算：迭代器对象表示的是一个数据流，可以只在需要时才去调用next来计算出一个值，就迭代器本身来说，同一时刻在内存中只有一个值，因而可以存放无限大的数据流，而对于其他容器类型，如列表，需要把所有的元素都存放于内存中，受内存大小的限制，可以存放的值的个数是有限的。</p>
+<h4 id="6-2-缺点："><a href="#6-2-缺点：" class="headerlink" title="6.2 缺点："></a>6.2 缺点：</h4><p>I、除非取尽，否则无法获取迭代器的长度</p>
+<p>II、只能取下一个值，不能回到开始，更像是‘一次性的’，迭代器产生后的唯一目标就是重复执行next方法直到值取尽，否则就会停留在某个位置，等待下一次调用next；若是要再次迭代同个对象，只能重新调用iter方法去创建一个新的迭代器对象，如果有两个或者多个循环使用同一个迭代器，必然只会有一个循环能取到值。</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>若函数体包含yield关键字，再调用函数，并不会执行函数体代码，得到的返回值即生成器对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">def</span> <span class="title function_">my_range</span>(<span class="params">start,stop,step=<span class="number">1</span></span>):</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">while</span> start &lt; stop:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">yield</span> start</span><br><span class="line"><span class="meta">... </span>        start+=step</span><br><span class="line"><span class="meta">... </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g=my_range(<span class="number">0</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>生成器内置有__iter__和__next__方法，所以生成器本身就是一个迭代器，因而我们可以用next(生成器)触发生成器所对应函数的执行。</p>
+<p>在函数内可以采用表达式形式的yield</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">eater</span>():</span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(<span class="string">&#x27;Ready to eat&#x27;</span>)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"><span class="meta">... </span>        food=<span class="keyword">yield</span></span><br><span class="line"><span class="meta">... </span>        <span class="built_in">print</span>(<span class="string">&#x27;get the food: %s, and start to eat&#x27;</span> %food)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>可以拿到函数的生成器对象持续为函数体send值，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>g=eater() <span class="comment"># 得到生成器对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line">&lt;generator <span class="built_in">object</span> eater at <span class="number">0x101b6e2b0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">next</span>(e) <span class="comment"># 需要事先”初始化”一次，让函数挂起在food=yield，等待调用g.send()方法为其传值</span></span><br><span class="line">Ready to eat</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.send(<span class="string">&#x27;包子&#x27;</span>)</span><br><span class="line">get the food: 包子, <span class="keyword">and</span> start to eat</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g.send(<span class="string">&#x27;鸡腿&#x27;</span>)</span><br><span class="line">get the food: 鸡腿, <span class="keyword">and</span> start to eat</span><br></pre></td></tr></table></figure>
+
+<p>针对表达式形式的yield，生成器对象必须事先被初始化一次，让函数挂起在food&#x3D;yield的位置，等待调用g.send()方法为函数体传值，g.send(None)等同于next(g)。</p>
+<h2 id="lamdA表达式"><a href="#lamdA表达式" class="headerlink" title="lamdA表达式"></a>lamdA表达式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">文件内容如下,标题为:姓名,性别,年纪,薪资</span><br><span class="line">egon male 18 3000</span><br><span class="line">alex male 38 30000</span><br><span class="line">wupeiqi female 28 20000</span><br><span class="line">yuanhao female 28 10000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">employees=[]</span><br><span class="line">keys=[<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;salary&#x27;</span>]</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;info.txt&quot;</span>,mode=<span class="string">&quot;rt&quot;</span>,encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        info = line.strip().split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">        employee=<span class="built_in">dict</span>(<span class="built_in">zip</span>(keys,info))</span><br><span class="line">        employee[<span class="string">&#x27;salary&#x27;</span>]=<span class="built_in">int</span>(employee[<span class="string">&#x27;salary&#x27;</span>])</span><br><span class="line">        employee[<span class="string">&#x27;age&#x27;</span>]=<span class="built_in">int</span>(employee[<span class="string">&#x27;age&#x27;</span>])</span><br><span class="line">        employees.append(employee)</span><br><span class="line"><span class="comment"># 所有人工资和</span></span><br><span class="line">res=<span class="built_in">sum</span>([employee[<span class="string">&quot;salary&quot;</span>] <span class="keyword">for</span> employee <span class="keyword">in</span> employees])</span><br><span class="line"><span class="comment"># 所有男生的名字</span></span><br><span class="line">res=[employee[<span class="string">&quot;name&quot;</span>] <span class="keyword">for</span> employee <span class="keyword">in</span> employees <span class="keyword">if</span> employee[<span class="string">&quot;sex&quot;</span>]==<span class="string">&#x27;male&#x27;</span>]</span><br><span class="line"><span class="comment"># 所有的名字首字母大写</span></span><br><span class="line">res=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> name:name.capitalize(),[employee[<span class="string">&quot;name&quot;</span>] <span class="keyword">for</span> employee <span class="keyword">in</span> employees]))</span><br><span class="line"><span class="comment"># 根据1得到的列表,过滤掉名字以a开头的人的信息</span></span><br><span class="line">res=<span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> name:name[<span class="number">0</span>]!=<span class="string">&quot;a&quot;</span>,[employee[<span class="string">&quot;name&quot;</span>] <span class="keyword">for</span> employee <span class="keyword">in</span> employees]))</span><br><span class="line"><span class="comment"># print(res)</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/18/day05/" title="Python函数高级" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/18/day05/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/hexo.github.io/2023/12/18/day06/" title="Python模块"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/18/day04/" title="垃圾回收机制和格式化输出"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

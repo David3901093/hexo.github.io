@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>常用模块 | Hexo</title>
+  <meta name="description" content="day07常用模块一 Hash介绍1、什么是哈希hash  hash一类算法，该算法接受传入的内容，经过运算得到一串hash值   hash值的特点：  只要传入的内容一样，得到的hash值必然一样  不能由hash值返解成内容  不管传入的内容有多大，只要使用的hash算法不变，得到的hash值长度是一定的   2、hash的用途 用途1：特点II用于密码密文传输与验证 用途2：特点I、III用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用模块">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/18/day07/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="day07常用模块一 Hash介绍1、什么是哈希hash  hash一类算法，该算法接受传入的内容，经过运算得到一串hash值   hash值的特点：  只要传入的内容一样，得到的hash值必然一样  不能由hash值返解成内容  不管传入的内容有多大，只要使用的hash算法不变，得到的hash值长度是一定的   2、hash的用途 用途1：特点II用于密码密文传输与验证 用途2：特点I、III用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-18T07:47:48.562Z">
+<meta property="article:modified_time" content="2023-12-18T08:09:32.464Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/18/day07/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day03/" class="title">容器(1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day02/" class="title">流程控制和容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#day07"><span class="toc-number">1.</span> <span class="toc-text">day07</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text">常用模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-Hash%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">一 Hash介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8Chash"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1、什么是哈希hash</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8Chash%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">二hash的使用：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%EF%BC%9A%E5%88%A9%E7%94%A8hashlib%E6%A8%A1%E5%9D%97%E6%A0%A1%E9%AA%8C%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.3.</span> <span class="toc-text">练习：利用hashlib模块校验文件</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-day07" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用模块
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/18/day07/" class="article-date">
+	  <time datetime="2023-12-18T07:47:48.562Z" itemprop="datePublished">2023-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/18/day07/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 481(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="day07"><a href="#day07" class="headerlink" title="day07"></a>day07</h1><h2 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h2><h3 id="一-Hash介绍"><a href="#一-Hash介绍" class="headerlink" title="一 Hash介绍"></a>一 Hash介绍</h3><h4 id="1、什么是哈希hash"><a href="#1、什么是哈希hash" class="headerlink" title="1、什么是哈希hash"></a>1、什么是哈希hash</h4><p>  hash一类算法，该算法接受传入的内容，经过运算得到一串hash值</p>
+<p>  hash值的特点：</p>
+<ol>
+<li><p>只要传入的内容一样，得到的hash值必然一样</p>
+</li>
+<li><p>不能由hash值返解成内容</p>
+</li>
+<li><p>不管传入的内容有多大，只要使用的hash算法不变，得到的hash值长度是一定的</p>
+</li>
+</ol>
+<p>2、hash的用途</p>
+<p>用途1：特点II用于密码密文传输与验证</p>
+<p>用途2：特点I、III用于文件完整性校验</p>
+<h3 id="二hash的使用："><a href="#二hash的使用：" class="headerlink" title="二hash的使用："></a>二hash的使用：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m=hashlib.md5()</span><br><span class="line">m.update(<span class="string">&#x27;hello&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m.update(<span class="string">&#x27;world&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">res=m.hexdigest() <span class="comment"># &#x27;helloworld&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line">m1=hashlib.md5(<span class="string">&#x27;he&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m1.update(<span class="string">&#x27;llo&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m1.update(<span class="string">&#x27;w&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m1.update(<span class="string">&#x27;orld&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">res=m1.hexdigest()<span class="comment"># &#x27;helloworld&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟撞库</span></span><br><span class="line">cryptograph=<span class="string">&#x27;aee949757a2e698417463d47acac93df&#x27;</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 制作密码字段</span></span><br><span class="line">passwds=[</span><br><span class="line">    <span class="string">&#x27;alex3714&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;alex1313&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;alex94139413&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;alex123456&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;123456alex&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;a123lex&#x27;</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">dic=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> passwds:</span><br><span class="line">    res=hashlib.md5(p.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    dic[p]=res.hexdigest()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟撞库得到密码</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> dic.items():</span><br><span class="line">    <span class="keyword">if</span> v == cryptograph:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;撞库成功，明文密码是：%s&#x27;</span> %k)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提升撞库的成本=&gt;密码加盐</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m=hashlib.md5()</span><br><span class="line"></span><br><span class="line">m.update(<span class="string">&#x27;天王&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m.update(<span class="string">&#x27;alex3714&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">m.update(<span class="string">&#x27;盖地虎&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(m.hexdigest())</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习：利用hashlib模块校验文件"><a href="#练习：利用hashlib模块校验文件" class="headerlink" title="练习：利用hashlib模块校验文件"></a>练习：利用hashlib模块校验文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">m=hashlib.md5()</span><br><span class="line"><span class="comment"># 模拟服务器端</span></span><br><span class="line">f_sever=<span class="built_in">open</span>(<span class="string">&#x27;text.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">size = os.path.getsize(<span class="string">&quot;text.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">    f_sever.seek(<span class="built_in">int</span>(size*(i/<span class="number">4</span>)))</span><br><span class="line">    m.update(f_sever.read(<span class="number">200</span>))</span><br><span class="line">res=m.hexdigest()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟客户端</span></span><br><span class="line">md5=hashlib.md5()</span><br><span class="line">f_client=<span class="built_in">open</span>(<span class="string">&#x27;text copy.txt&#x27;</span>,mode=<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">size = os.path.getsize(<span class="string">&quot;text copy.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">5</span>):</span><br><span class="line">    f_client.seek(<span class="built_in">int</span>(size*(i/<span class="number">4</span>)))</span><br><span class="line">    md5.update(f_client.read(<span class="number">200</span>))</span><br><span class="line">res2=md5.hexdigest()</span><br><span class="line"><span class="comment"># 输出比对结果</span></span><br><span class="line"><span class="built_in">print</span>(res==res2)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/18/day07/" title="常用模块" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/18/day07/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/hexo.github.io/2023/12/18/day02/" title="流程控制和容器"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/18/%E6%9C%80%E5%90%8E%E7%9A%84%E5%8F%AE%E5%92%9B/" title="最后的叮咛"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

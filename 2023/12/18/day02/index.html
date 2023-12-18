@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>流程控制和容器 | Hexo</title>
+  <meta name="description" content="day02-代码块12以冒号作为开始,用缩进来划分相同的作用域,这个整体是一个代码块作用域：作用的区域 -流程控制12(1)流程控制的定义(2)流程控制的结构 -分支结构123关键字:if elif else(1)分支结构的种类(2)分支结构的特点 -循环结构1234关键字:while &#x2F; for..in..(1)循环结构的种类(2)循环结构的特点  关键字的使用1pass &#x2F; break &#x2F; c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流程控制和容器">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/18/day02/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="day02-代码块12以冒号作为开始,用缩进来划分相同的作用域,这个整体是一个代码块作用域：作用的区域 -流程控制12(1)流程控制的定义(2)流程控制的结构 -分支结构123关键字:if elif else(1)分支结构的种类(2)分支结构的特点 -循环结构1234关键字:while &#x2F; for..in..(1)循环结构的种类(2)循环结构的特点  关键字的使用1pass &#x2F; break &#x2F; c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-18T07:47:48.568Z">
+<meta property="article:modified_time" content="2023-12-18T07:52:06.615Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/18/day02/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day03/" class="title">容器(1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day02/" class="title">流程控制和容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#day02"><span class="toc-number">1.</span> <span class="toc-text">day02</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-number">1.0.1.</span> <span class="toc-text">-代码块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">1.0.2.</span> <span class="toc-text">-流程控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.0.3.</span> <span class="toc-text">-分支结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.0.4.</span> <span class="toc-text">-循环结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.0.5.</span> <span class="toc-text">关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.0.6.</span> <span class="toc-text">练习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.7.</span> <span class="toc-text">字符串相关操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96format"><span class="toc-number">1.0.8.</span> <span class="toc-text">字符串的格式化format</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96format"><span class="toc-number">1.0.9.</span> <span class="toc-text">字符串格式化format</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.10.</span> <span class="toc-text">字符串相关函数</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-day02" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      流程控制和容器
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/18/day02/" class="article-date">
+	  <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/18/day02/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.9k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="day02"><a href="#day02" class="headerlink" title="day02"></a>day02</h1><h3 id="代码块"><a href="#代码块" class="headerlink" title="-代码块"></a>-代码块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">以冒号作为开始,用缩进来划分相同的作用域,这个整体是一个代码块</span><br><span class="line">作用域：作用的区域</span><br></pre></td></tr></table></figure>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="-流程控制"></a>-流程控制</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)流程控制的定义</span><br><span class="line">(2)流程控制的结构</span><br></pre></td></tr></table></figure>
+<h3 id="分支结构"><a href="#分支结构" class="headerlink" title="-分支结构"></a>-分支结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">关键字:if elif else</span><br><span class="line">(1)分支结构的种类</span><br><span class="line">(2)分支结构的特点</span><br></pre></td></tr></table></figure>
+<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="-循环结构"></a>-循环结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">关键字:while / for..in..</span><br><span class="line">(1)循环结构的种类</span><br><span class="line">(2)循环结构的特点</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="关键字的使用"><a href="#关键字的使用" class="headerlink" title="关键字的使用"></a>关键字的使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pass / break / continue</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span> * <span class="number">10</span>, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">20</span>)</span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">100</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">20</span>)</span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">100</span>:</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;☆&quot;</span>, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;★&quot;</span>, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">20</span>)</span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">100</span>:</span><br><span class="line">    <span class="keyword">if</span> i // <span class="number">10</span> % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;☆&quot;</span>, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> i // <span class="number">10</span> % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;★&quot;</span>, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">10</span> == <span class="number">9</span>:</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="comment"># 5</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">j = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i &lt;= <span class="number">9</span>:</span><br><span class="line">    <span class="keyword">while</span> j &lt;= i:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;%dX%d=%2d&quot;</span> % (j, i, i * j), end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    j = <span class="number">1</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"><span class="comment"># 6</span></span><br><span class="line">x = <span class="number">0</span></span><br><span class="line">y = <span class="number">0</span></span><br><span class="line">z = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x&lt;=<span class="number">20</span>:</span><br><span class="line">    y=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> y&lt;=<span class="number">33</span>:</span><br><span class="line">        z=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> z&lt;=<span class="number">100</span>:</span><br><span class="line">            <span class="keyword">if</span> x+y+z ==<span class="number">100</span> <span class="keyword">and</span> <span class="number">5</span>*x+<span class="number">3</span>*y+z//<span class="number">3</span>==<span class="number">100</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;公鸡 %d 母鸡 %d 小鸡 %d &quot;</span> %(x,y,z))</span><br><span class="line">            z+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        y+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    x+=<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">计算公式：i=(n+1)//2</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入打印的总个数&quot;</span>))</span><br><span class="line">row = (n + <span class="number">1</span>) // <span class="number">2</span></span><br><span class="line">i =<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i&lt;row:</span><br><span class="line"><span class="comment"># 每行空格数</span></span><br><span class="line">   space=row-i</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>*space,end=<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="comment"># 打印星星</span></span><br><span class="line">   star = <span class="number">2</span>*i-<span class="number">1</span></span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span>*star,end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span>()</span><br><span class="line">   i+=<span class="number">1</span></span><br><span class="line">i=row</span><br><span class="line"><span class="comment">#打印倒三角</span></span><br><span class="line"><span class="keyword">while</span> i&gt;=<span class="number">1</span>:</span><br><span class="line">   <span class="comment"># 每行空格数</span></span><br><span class="line">   space = row - i</span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot; &quot;</span> * space, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">   <span class="comment"># 打印星星</span></span><br><span class="line">   star = <span class="number">2</span> * i - <span class="number">1</span></span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;*&quot;</span> * star, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span>()</span><br><span class="line">   i -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>多级容器迭代操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tuple_var= (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,&#123;<span class="string">&quot;a&quot;</span>:<span class="number">12</span>,<span class="string">&quot;b&quot;</span>:<span class="number">14</span>&#125;])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tuple_var:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(i,(<span class="built_in">tuple</span>,<span class="built_in">set</span>,<span class="built_in">list</span>,<span class="built_in">dict</span>)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> i:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(j, (<span class="built_in">tuple</span>, <span class="built_in">set</span>, <span class="built_in">list</span>, <span class="built_in">dict</span>)):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> j:</span><br><span class="line">                    <span class="built_in">print</span>(k)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(j)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">     <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
+
+<p>字符串切片练习：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">strvar = &quot;&quot;132a4b5c&quot;</span></span><br><span class="line"><span class="string">1)对宁符串进行切片形成新的字符串&quot;&quot;132&quot;&quot;</span></span><br><span class="line"><span class="string">2)对字符串进行切片形成新的字符串&quot;a4b&quot;&quot;</span></span><br><span class="line"><span class="string">3)对字符串进行切片形成新的字符串&quot;&quot;1245&quot;&quot;</span></span><br><span class="line"><span class="string">4)对字将串进行切片形成新的字符串&quot;&quot;3ab&quot;&quot;</span></span><br><span class="line"><span class="string">5)对字符串进行切片形成新的字符串&quot;c&quot;</span></span><br><span class="line"><span class="string">6)对字符串进行切片形成新的字符串&quot;ba3&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">strvar = <span class="string">&quot;132a4b5c&quot;</span></span><br><span class="line">str1 = strvar[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(str1)</span><br><span class="line">str2 = strvar[<span class="number">3</span>:<span class="number">6</span>]</span><br><span class="line"><span class="built_in">print</span>(str2)</span><br><span class="line">str3 = strvar[::<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(str3)</span><br><span class="line">str4 = strvar[<span class="number">1</span>:<span class="number">6</span>:<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(str4)</span><br><span class="line">str5 = strvar[-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(str5)</span><br><span class="line"></span><br><span class="line">str6 = strvar[-<span class="number">3</span>::-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(str6)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符串相关操作"><a href="#字符串相关操作" class="headerlink" title="字符串相关操作"></a>字符串相关操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)字符串的拼接</span><br><span class="line">(2)字符串的重复</span><br><span class="line">(3)字符串跨行拼接</span><br><span class="line">(4)字符串的索引</span><br><span class="line">(5)字符串的切片:</span><br><span class="line">语法 =&gt; 字符串[::]  完整格式：[开始索引:结束索引:间隔值]</span><br><span class="line">	(1)[开始索引:]  从开始索引截取到字符串的最后</span><br><span class="line">	(2)[:结束索引]  从开头截取到结束索引之前(结束索引-1)</span><br><span class="line">	(3)[开始索引:结束索引]  从开始索引截取到结束索引之前(结束索引-1)</span><br><span class="line">	(4)[开始索引:结束索引:间隔值]  从开始索引截取到结束索引之前按照指定的间隔截取字符</span><br><span class="line">	(5)[:]或[::]  截取所有字符串</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串的格式化format"><a href="#字符串的格式化format" class="headerlink" title="字符串的格式化format"></a>字符串的格式化format</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1)顺序传参</span><br><span class="line">(2)索引传参</span><br><span class="line">(3)关键字传参</span><br><span class="line">(4)容器类型数据(列表或元祖)传参</span><br><span class="line">(5)format的填充符号的使用( ^ &gt; &lt; )</span><br><span class="line">(6)进制转换等特殊符号的使用( :d :f :s :, )</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串格式化format"><a href="#字符串格式化format" class="headerlink" title="字符串格式化format"></a>字符串格式化format</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (1)顺序传参</span></span><br><span class="line"><span class="comment"># &#123;&#125;是format中的占位符</span></span><br><span class="line">strvar = <span class="string">&quot;&#123;&#125;向&#123;&#125;开了一枪,饮蛋而亡&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;赵沈阳&quot;</span>,<span class="string">&quot;斋保障&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(strvar)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (2)索引传参</span></span><br><span class="line"></span><br><span class="line">strvar = <span class="string">&quot;&#123;1&#125;向&#123;0&#125;开了一枪;饮蛋而亡&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;赵沈阳&quot;</span>,<span class="string">&quot;需保障&quot;</span>)</span><br><span class="line"><span class="built_in">print</span> (strvar)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (3)关键字传参</span></span><br><span class="line"></span><br><span class="line">strvar =<span class="string">&quot;&#123;who1&#125;摸了&#123;who2&#125;一下 ,回头一巴掌&quot;</span>.<span class="built_in">format</span>(who1=<span class="string">&quot;王伟&quot;</span> ,who2=<span class="string">&quot;马容妮&quot;</span>)</span><br><span class="line">strvar = <span class="string">&quot;&#123;who1&#125;损了&#123;who2&#125;一下,回头一巴掌&quot;</span>.<span class="built_in">format</span> (who1=<span class="string">&quot;马春妮&quot;</span> ,who2=<span class="string">&quot;王伟&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(strvar)</span><br><span class="line"></span><br><span class="line"><span class="comment"># (4)容器类型数据(列表或元组)传参</span></span><br><span class="line">strvar = <span class="string">&quot;&#123;0[0]&#125;模了&#123;1[1]&#125;一下,嘿嘿一笑,有戏&quot;</span>.<span class="built_in">format</span>([<span class="string">&quot;赵蜂拥&quot;</span> <span class="string">&quot;赵世超&quot;</span>,<span class="string">&quot;杨元将&quot;</span>],(<span class="string">&quot;王前涵&quot;</span>, <span class="string">&quot;王同培&quot;</span>))</span><br><span class="line"><span class="built_in">print</span> (strvar)</span><br><span class="line"></span><br><span class="line">strvar = <span class="string">&quot;&#123;group1[0]&#125;摸了&#123;group2[1]&#125;一下,嘿嘿一笑,有戏&quot;</span> .<span class="built_in">format</span> (group1=[<span class="string">&quot;赵蜂拥&quot;</span>,<span class="string">&quot;赵世超&quot;</span>, <span class="string">&quot;杨元评&quot;</span>],group2= (<span class="string">&quot;王雨涵&quot;</span>, <span class="string">&quot;王同培&quot;</span>))</span><br><span class="line"><span class="built_in">print</span> (strvar)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果该容器是字典，通过键取值时，不需要加引号，通过索引取值时，不用负索引</span></span><br><span class="line">strvar= <span class="string">&quot;&#123;group1[zry]&#125;摸了&#123;group2[1])一下，黑嘿一笑,有戏&quot;</span> .<span class="built_in">format</span>(group1=&#123;<span class="string">&quot;zry&quot;</span>: <span class="string">&quot;赵蜂拥&quot;</span> ,<span class="string">&quot;zs&quot;</span> : <span class="string">&quot;赵世超&quot;</span>&#125;,group2=(<span class="string">&quot;王雨涵&quot;</span>,<span class="string">&quot;王同赔&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(strvar)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符串相关函数"><a href="#字符串相关函数" class="headerlink" title="字符串相关函数"></a>字符串相关函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*capitalize 字符串首字母大写 </span><br><span class="line">*title 每个单词的首字母大写 </span><br><span class="line">*upper 将所有字母变成大写</span><br><span class="line">*lower 将所有字母变成小写 </span><br><span class="line">*swapcase 大小写互换 </span><br><span class="line">*len 计算字符串的长度 </span><br><span class="line">*count 统计字符串中某个元素的数量 </span><br><span class="line">*find 查找某个字符串第一次出现的索引位置 </span><br><span class="line">*index 与 find 功能相同 find找不到返回-1,index找不到数据直接报错</span><br><span class="line">*startswith 判断是否以某个字符或字符串为开头 </span><br><span class="line">*endswith 判断是否以某个字符或字符串结尾 </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*isupper 判断字符串是否都是大写字母 </span><br><span class="line">*islower 判断字符串是否都是小写字母 </span><br><span class="line">#istitle 判断字符串是否每个单词都首字母大写 </span><br><span class="line">#isalnum 判断字符串是否是由数字、字母、汉字组成 </span><br><span class="line">*isalpha 判断字符串是否由字母和文字组成 </span><br><span class="line">*isdigit 检测字符串数是数字组成 接受二进制字节流 </span><br><span class="line">*isdecimal 检测字符串是否以数字组成  必须是纯数字</span><br><span class="line">#isnumeric 检测字符串是否以数字组成 接受中文&quot;四&quot;</span><br><span class="line">#isspace   判断字符串是否由空白符组成</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">*split 按某字符将字符串分割成列表(默认字符是空格)</span><br><span class="line">*join  按某字符将列表拼接成字符串(容器类型都可)</span><br><span class="line">#splitlines 按换行来进行切分(\n)</span><br><span class="line">#zfill  填充字符串(默认填充0,原字符串右对齐)</span><br><span class="line">#ljust  填充字符串,原字符居左 (默认填充空格)</span><br><span class="line">#rjust  填充字符串,原字符居右 (默认填充空格)</span><br><span class="line">*center 填充字符串,原字符居中 (默认填充空格)</span><br><span class="line">*strip  默认去掉首尾两边的空白符 </span><br><span class="line">#rstrip 去掉右边某个字符 </span><br><span class="line">#lstrip 去掉左边某个字符 </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">*replace()</span><br><span class="line">	功能:   把字符串的旧字符换成新字符</span><br><span class="line">	格式:   字符串.replace(&#x27;旧字符&#x27;,&#x27;新字符&#x27;[, 限制替换的次数])</span><br><span class="line">	返回值: 替换之后的字符串</span><br><span class="line"></span><br><span class="line">#maketrans translate 是一对</span><br><span class="line">maketrans()</span><br><span class="line">	功能:   制作用于字符串替换的映射表</span><br><span class="line">	格式:   字符串.maketrans(&#x27;查找字符&#x27;,&#x27;替换字符&#x27;)两个字符必须长度相等</span><br><span class="line">	返回值: 字典</span><br><span class="line">translate()</span><br><span class="line">	功能:   进行字符串替换操作</span><br><span class="line">	格式:   字符串.translate(maketrans返回的字典)</span><br><span class="line">	返回值: 替换之后的字符串</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/18/day02/" title="流程控制和容器" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/18/day02/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/hexo.github.io/2023/12/18/day03/" title="容器(1)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/18/day07/" title="常用模块"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

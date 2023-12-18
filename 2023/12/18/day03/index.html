@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>容器(1) | Hexo</title>
+  <meta name="description" content="列表列表相关操作123456789101112131415161718(1)列表的拼接   (同元组)LIS+LIS2(2)列表的重复   (同元组)lis*3(3)列表的切片   (同元组)语法 &#x3D;&gt; 列表[::]  完整格式：[开始索引:结束索引:间隔值]	(1)[开始索引:]  从开始索引截取到列表的最后	(2)[:结束索引]  从开头截取到结束索引之前(结束索引-1)	(3)[开始索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器(1)">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/18/day03/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="列表列表相关操作123456789101112131415161718(1)列表的拼接   (同元组)LIS+LIS2(2)列表的重复   (同元组)lis*3(3)列表的切片   (同元组)语法 &#x3D;&gt; 列表[::]  完整格式：[开始索引:结束索引:间隔值]	(1)[开始索引:]  从开始索引截取到列表的最后	(2)[:结束索引]  从开头截取到结束索引之前(结束索引-1)	(3)[开始索">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-18T07:47:48.571Z">
+<meta property="article:modified_time" content="2023-12-18T07:53:10.762Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/18/day03/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day03/" class="title">容器(1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day02/" class="title">流程控制和容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">1.0.1.</span> <span class="toc-text">列表相关操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">列表的相关函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-number">1.0.3.</span> <span class="toc-text">深拷贝浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.4.</span> <span class="toc-text">元组相关操作和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.0.5.</span> <span class="toc-text">总结:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">元组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E5%88%9B%E5%BB%BA%E5%85%83%E7%BB%84"><span class="toc-number">2.0.1.</span> <span class="toc-text">生成器推导式创建元组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E6%80%BB%E7%BB%93"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">元组总结</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-number">3.</span> <span class="toc-text">字典</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-day03" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      容器(1)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/18/day03/" class="article-date">
+	  <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/18/day03/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h3 id="列表相关操作"><a href="#列表相关操作" class="headerlink" title="列表相关操作"></a>列表相关操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(1)列表的拼接   (同元组)</span><br><span class="line">LIS+LIS2</span><br><span class="line">(2)列表的重复   (同元组)</span><br><span class="line">lis*3</span><br><span class="line">(3)列表的切片   (同元组)</span><br><span class="line">语法 =&gt; 列表[::]  完整格式：[开始索引:结束索引:间隔值]</span><br><span class="line">	(1)[开始索引:]  从开始索引截取到列表的最后</span><br><span class="line">	(2)[:结束索引]  从开头截取到结束索引之前(结束索引-1)</span><br><span class="line">	(3)[开始索引:结束索引]  从开始索引截取到结束索引之前(结束索引-1)</span><br><span class="line">	(4)[开始索引:结束索引:间隔值]  从开始索引截取到结束索引之前按照指定的间隔截取列表元素值</span><br><span class="line">	(5)[:]或[::]  截取所有列表</span><br><span class="line">(4)列表的获取   (同元组)</span><br><span class="line">lis[1]</span><br><span class="line">lis[1:-1]</span><br><span class="line">(5)列表的修改   ( 可切片 )</span><br><span class="line">(6)列表的删除   ( 可切片 )</span><br><span class="line">del lis[0]</span><br><span class="line">del lis[1:-1]</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表的相关函数"><a href="#列表的相关函数" class="headerlink" title="列表的相关函数"></a>列表的相关函数</h3><p><strong>append()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：向列表的末尾添加新的元素</span><br><span class="line">格式：列表.append(值)</span><br><span class="line">返回值：None</span><br><span class="line">注意：新添加的值在列表的末尾，该函数直接操作原有列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>insert()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：在指定索引之前插入元素</span><br><span class="line">格式：列表.insert(索引,值)</span><br><span class="line">返回值:None</span><br><span class="line">注意：直接改变原有列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>extend()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：迭代追加所有元素</span><br><span class="line">格式：列表.extend(可迭代性数据)</span><br><span class="line">返回值：None</span><br><span class="line">注意：直接改变原有列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>pop()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：通过指定索引删除元素,若没有索引移除最后那个</span><br><span class="line">格式：列表.pop(索引)</span><br><span class="line">返回值：删除的元素</span><br><span class="line">(注意：没有指定索引，默认移除最后一个元素 )</span><br></pre></td></tr></table></figure>
+
+<p><strong>remove()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：通过给予的值来删除,如果多个相同元素,默认删除第一个</span><br><span class="line">格式：列表.remove(值)</span><br><span class="line">返回值：无</span><br><span class="line">(注意：如果有索引的情况推荐使用pop,效率高于remove)</span><br></pre></td></tr></table></figure>
+<p><strong>clear</strong>()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">功能：清空列表</span><br><span class="line">格式：列表.clear()</span><br><span class="line">返回值：空列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>index()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">功能：获取某个值在列表中的索引</span><br><span class="line">格式：列表.index(值[,start][,end]) # []  表达参数可选项 </span><br><span class="line">返回值：找到返回索引  (找不到报错)</span><br></pre></td></tr></table></figure>
+
+<p><strong>count()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">功能：计算某个元素出现的次数</span><br><span class="line">格式：列表.count(值)</span><br><span class="line">返回值：次数</span><br></pre></td></tr></table></figure>
+
+<p><strong>sort()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：列表排序(默认小到大排序)</span><br><span class="line">格式：列表.sort(reverse=False)                        </span><br><span class="line">返回值：None</span><br><span class="line">注意：直接更改原列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>reverse()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">功能：列表反转操作</span><br><span class="line">格式：列表.reverse()</span><br><span class="line">返回值：None</span><br><span class="line">注意：直接更改原列表</span><br></pre></td></tr></table></figure>
+
+<h3 id="深拷贝浅拷贝"><a href="#深拷贝浅拷贝" class="headerlink" title="深拷贝浅拷贝"></a>深拷贝浅拷贝</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#copy模块中有 浅拷贝 和 深拷贝 两种方法</span></span><br><span class="line">(<span class="number">1</span>)浅拷贝:  浅拷贝只拷贝外层列表  内层列表跟随原列表进行改变</span><br><span class="line">	<span class="comment"># 浅拷贝copy.copy(listvar) 或者 listvar.copy()</span></span><br><span class="line">(<span class="number">2</span>)深拷贝:  拷贝整个列表  内外列表都不跟随原列表进行改变</span><br><span class="line">	<span class="comment"># 深拷贝copy.deepcopy(listvar)</span></span><br><span class="line">注意:copy模块的copy方法 和 python内置的函数copy一样 都是浅拷贝</span><br><span class="line">————————————-</span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">list1=[<span class="string">&#x27;Gzl&#x27;</span>,<span class="number">20</span>,[<span class="string">&#x27;pro&#x27;</span>,<span class="string">&#x27;sports&#x27;</span>]]</span><br><span class="line">list2=list1.copy()</span><br><span class="line">list2[<span class="number">2</span>][<span class="number">0</span>]=<span class="string">&#x27;male&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(list1)<span class="comment">#[&#x27;Gzl&#x27;, 20, [&#x27;pro&#x27;, &#x27;sports&#x27;]]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(list1[<span class="number">2</span>]),<span class="built_in">id</span>(list2[<span class="number">2</span>]))</span><br><span class="line"><span class="comment"># 浅拷贝：把原列表第一层完全拷贝一份给新列表，对于不可变类型，拷贝值，对于可变类型,则会修改原来的值</span></span><br><span class="line"><span class="comment"># 综合实验可以得出，要想copy得到的新列表与原列表的改操作完全独立开#必须有一种可以区分开可变类型与不可变类型的copy机制，这就是深copy</span></span><br><span class="line">list3=copy.deepcopy(list1)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(list1[<span class="number">2</span>]),<span class="built_in">id</span>(list3[<span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">list3[<span class="number">2</span>][<span class="number">0</span>]=<span class="string">&#x27;female&#x27;</span></span><br><span class="line"><span class="comment"># print(list1)</span></span><br><span class="line"><span class="comment"># print(list3)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="元组相关操作和方法"><a href="#元组相关操作和方法" class="headerlink" title="元组相关操作和方法"></a>元组相关操作和方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">元组的相关操作除了不能修改和删除其中的元素之外 , 剩下操作都和列表相同.</span><br><span class="line">元组里面能用的方法只有 index 和 count </span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>浅拷贝:只拷贝一级容器中的所有元素独立出一个单独的空间.</p>
+<p>深拷贝:把所有层级的容器中所有元素都单独拷贝一份，形成独立的空间<br>tuple 只有count index 两个方法使用同列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">lis = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>]</span><br><span class="line"><span class="keyword">del</span> lis[<span class="number">1</span>:-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"><span class="comment"># 深浅拷贝</span></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line">lis = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&quot;b&quot;</span>]]</span><br><span class="line">lis2 = copy.copy(lis)</span><br><span class="line">lis2[<span class="number">0</span>] = <span class="number">2</span></span><br><span class="line">lis2[-<span class="number">1</span>][-<span class="number">1</span>] = <span class="string">&quot;a&quot;</span></span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"><span class="built_in">print</span>(lis2)</span><br><span class="line">lis3 = copy.deepcopy(lis)</span><br><span class="line">lis3[<span class="number">0</span>] =<span class="number">3</span></span><br><span class="line">lis3[-<span class="number">1</span>][-<span class="number">1</span>] = <span class="string">&quot;c&quot;</span></span><br><span class="line"><span class="built_in">print</span>(lis)</span><br><span class="line"><span class="built_in">print</span>(lis3)</span><br></pre></td></tr></table></figure>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>元组：其内容不能被修改，只允许访问。<br>元组定义:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元组的三种定义方式</span></span><br><span class="line">a=(<span class="number">100</span>,) <span class="comment"># 或a=100,</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line">b=<span class="built_in">tuple</span>([<span class="number">100</span>])</span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">c=<span class="number">100</span>,<span class="number">200</span>,<span class="number">300</span></span><br><span class="line"><span class="comment">#3</span></span><br><span class="line">d=<span class="built_in">tuple</span>(<span class="built_in">range</span>(<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a,b,c,d)</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成器推导式创建元组"><a href="#生成器推导式创建元组" class="headerlink" title="生成器推导式创建元组"></a>生成器推导式创建元组</h3><p>从形式上看，生成器推导式与列表推导式类似，只是生成器推导式使用小括号，而是一个生列表推导式直接生成列表对象，生成器推导式生成的不是列表也不是元组。<br>生成器对象：<br>我们可以通过生成器对象，转化成列表或者元组。也可以使用生成器对象的 next（）方法进行遍历，或者直接作为迭代器对象来使用。不管什么方式使用，元素访问结束后如果需要重新访问其中的元素，必须重新创建该生成器对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成器生成元组</span></span><br><span class="line">a = (x *<span class="number">10</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span>(a.__next__())</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<h4 id="元组总结"><a href="#元组总结" class="headerlink" title="元组总结"></a>元组总结</h4><ol>
+<li><p>元组的核心特点是:不可变序列。</p>
+</li>
+<li><p>元组的访问和处理速度比列表快</p>
+</li>
+<li><p>与整数和字符串一样，元组可以作为字典的键，列表则永远不能作为字典的键使用。</p>
+</li>
+</ol>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>列表中我们通过“下标数字找到对应的对象。字典中通过键对象”找到对应的值对象”。</p>
+<ol>
+<li>“键”是任意的不可变数据，比如:整数、浮点数、字符串、元组。</li>
+<li>但是:列表、字典、集合这些可变对象，不能作为“键”。</li>
+<li>并且“键”不可重复。</li>
+<li>“值”可以是任意的数据，并目可重复。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># zip方法创建字典</span></span><br><span class="line">keys =[<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;age&#x27;</span>,<span class="string">&#x27;sex&#x27;</span>]</span><br><span class="line">values = [<span class="string">&#x27;gzl&#x27;</span>,<span class="number">18</span>,<span class="string">&#x27;男&#x27;</span>]</span><br><span class="line">dic=<span class="built_in">dict</span>(<span class="built_in">zip</span>(keys,values))</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line"><span class="comment"># &#123;&#x27;name&#x27;: None, &#x27;age&#x27;: None, &#x27;sex&#x27;: None&#125;</span></span><br><span class="line">dic=<span class="built_in">dict</span>.fromkeys(keys)</span><br><span class="line"><span class="comment"># dict_items([(&#x27;name&#x27;, None), (&#x27;age&#x27;, None), (&#x27;sex&#x27;, None)])</span></span><br><span class="line"><span class="built_in">print</span>(dic.items())</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/18/day03/" title="容器(1)" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/18/day03/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/hexo.github.io/2023/12/18/day04/" title="垃圾回收机制和格式化输出"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/18/day02/" title="流程控制和容器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Python模块 | Hexo</title>
+  <meta name="description" content="day06模块一 模块介绍在Python中，一个py文件就是一个模块，文件名为xxx.py模块名则是xxx,导入模块可以引用模块中已经写好的功能。如果把开发程序比喻成制造一台电脑，编写模块就像是在制造电脑的零部件，准备好零部件后，剩下的工作就是按照逻辑把它们组装到一起。 将程序模块化会使得程序的组织结构清晰，维护起来更加方便。比起直接开发一个完整的程序，单独开发一个小的模块也会更加简单，并且程序中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python模块">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2023/12/18/day06/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="day06模块一 模块介绍在Python中，一个py文件就是一个模块，文件名为xxx.py模块名则是xxx,导入模块可以引用模块中已经写好的功能。如果把开发程序比喻成制造一台电脑，编写模块就像是在制造电脑的零部件，准备好零部件后，剩下的工作就是按照逻辑把它们组装到一起。 将程序模块化会使得程序的组织结构清晰，维护起来更加方便。比起直接开发一个完整的程序，单独开发一个小的模块也会更加简单，并且程序中">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-18T07:47:48.580Z">
+<meta property="article:modified_time" content="2023-12-18T08:08:28.630Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2023/12/18/day06/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day03/" class="title">容器(1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.571Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/day02/" class="title">流程控制和容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.568Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#day06"><span class="toc-number">1.</span> <span class="toc-text">day06</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">一 模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81from%E2%80%A6import-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.2.</span> <span class="toc-text">二、from…import 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%BE%AA%E7%8E%AF%E5%AF%BC%E5%85%A5%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.3.</span> <span class="toc-text">三 循环导入问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-%E6%90%9C%E7%B4%A2%E6%A8%A1%E5%9D%97%E7%9A%84%E8%B7%AF%E5%BE%84%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.1.4.</span> <span class="toc-text">四 搜索模块的路径与优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8C%BA%E5%88%86py%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%94%A8%E9%80%94"><span class="toc-number">1.1.5.</span> <span class="toc-text">五、区分py文件的两种用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E8%A7%84%E8%8C%83%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.6.</span> <span class="toc-text">六、编写一个规范的模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="toc-number">1.1.7.</span> <span class="toc-text">七、软件目录开发规范</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-day06" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python模块
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2023/12/18/day06/" class="article-date">
+	  <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2023/12/18/day06/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="day06"><a href="#day06" class="headerlink" title="day06"></a>day06</h1><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="一-模块介绍"><a href="#一-模块介绍" class="headerlink" title="一 模块介绍"></a>一 模块介绍</h3><p>在Python中，一个py文件就是一个模块，文件名为xxx.py模块名则是xxx,导入模块可以引用模块中已经写好的功能。如果把开发程序比喻成制造一台电脑，编写模块就像是在制造电脑的零部件，准备好零部件后，剩下的工作就是按照逻辑把它们组装到一起。</p>
+<p>将程序模块化会使得程序的组织结构清晰，维护起来更加方便。比起直接开发一个完整的程序，单独开发一个小的模块也会更加简单，并且程序中的模块与电脑中的零部件稍微不同的是：程序中的模块可以被重复使用。所以总结下来，使用模块既保证了代码的重用性，又增强了程序的结构性和可维护性。另外除了自定义模块外，我们还可以导入使用内置或第三方模块提供的现成功能，这种“拿来主义”极大地提高了程序员的开发效率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件名：foo.py</span></span><br><span class="line">x=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get</span>():</span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change</span>():</span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line">    x=<span class="number">0</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;from the func&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>要想在另外一个py文件中引用foo.py中的功能，需要使用import foo，首次导入模块会做三件事：</p>
+<p>1、执行源文件代码</p>
+<p>2、产生一个新的名称空间用于存放源文件执行过程中产生的名字</p>
+<p>3、在当前执行文件所在的名称空间中得到一个名字foo，该名字指向新创建的模块名称空间，若要引用模块名称空间中的名字，需要加上该前缀，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> foo <span class="comment">#导入模块foo</span></span><br><span class="line">a=foo.x <span class="comment">#引用模块foo中变量x的值赋值给当前名称空间中的名字a</span></span><br><span class="line">foo.get() <span class="comment">#调用模块foo的get函数</span></span><br><span class="line">foo.change() <span class="comment">#调用模块foo中的change函数</span></span><br><span class="line">obj=foo.Foo() <span class="comment">#使用模块foo的类Foo来实例化，进一步可以执行obj.func()</span></span><br></pre></td></tr></table></figure>
+
+<p>加上foo.作为前缀就相当于指名道姓地说明要引用foo名称空间中的名字，所以肯定不会与当前执行文件所在名称空间中的名字相冲突，并且若当前执行文件的名称空间中存在x，执行foo.get()或foo.change()操作的都是源文件中的全局变量x。</p>
+<p>需要强调一点是，第一次导入模块已经将其加载到内存空间了，之后的重复导入会直接引用内存中已存在的模块，不会重复执行文件，通过import sys，打印sys.modules的值可以看到内存中已经加载的模块名。</p>
+<p>提示：</p>
+<blockquote>
+<blockquote>
+<p>1、在Python中模块也属于第一类对象，可以进行赋值、以数据形式传递以及作为容器类型的元素等操作。<br>2、模块名应该遵循小写形式，标准库从python2过渡到python3做出了很多这类调整，比如ConfigParser、Queue、SocketServer全更新为纯小写形式。</p>
+</blockquote>
+</blockquote>
+<p>用import语句导入多个模块，可以写多行import语句，还可以在一行导入，用逗号分隔开不同的模块。但其实第一种形式更为规范，可读性更强，推荐使用，而且我们导入的模块中可能包含有python内置的模块、第三方的模块、自定义的模块，为了便于明显地区分它们，我们通常在文件的开头导入模块，并且分类导入，一类模块的导入与另外一类的导入用空行隔开，不同类别的导入顺序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> python内置模块</span><br><span class="line"><span class="number">2.</span> 第三方模块</span><br><span class="line"><span class="number">3.</span> 程序员自定义模块</span><br></pre></td></tr></table></figure>
+
+<p> 当然，我们也可以在函数内导入模块，对比在文件开头导入模块属于全局作用域，在函数内导入的模块则属于局部的作用域。</p>
+<h3 id="二、from…import-语句"><a href="#二、from…import-语句" class="headerlink" title="二、from…import 语句"></a>二、from…import 语句</h3><p>from…import…与import语句基本一致，唯一不同的是：使用import foo导入模块后，引用模块中的名字都需要加上foo.作为前缀，而使用from foo import x,get,change,Foo则可以在当前执行文件中直接引用模块foo中的名字，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> foo <span class="keyword">import</span> x,get,change <span class="comment">#将模块foo中的x和get导入到当前名称空间</span></span><br><span class="line">a=x <span class="comment">#直接使用模块foo中的x赋值给a</span></span><br><span class="line">get() <span class="comment">#直接执行foo中的get函数</span></span><br><span class="line">change() <span class="comment">#即便是当前有重名的x，修改的仍然是源文件中的x</span></span><br></pre></td></tr></table></figure>
+
+<p>无需加前缀的好处是使得我们的代码更加简洁，坏处则是容易与当前名称空间中的名字冲突，如果当前名称空间存在相同的名字，则后定义的名字会覆盖之前定义的名字。</p>
+<p>如果我们需要引用模块中的名字过多的话，可以采用上述的导入形式来达到节省代码量的效果，但是需要强调的一点是：只能在模块最顶层使用<code>*</code>的方式导入，在函数内则非法，并且<code>*</code>的方式会带来一种副作用，即我们无法搞清楚究竟从源文件中导入了哪些名字到当前位置，这极有可能与当前位置的名字产生冲突。模块的编写者可以在自己的文件中定义<code>__all__</code>变量用来控制*代表的意思</p>
+<h3 id="三-循环导入问题"><a href="#三-循环导入问题" class="headerlink" title="三 循环导入问题"></a>三 循环导入问题</h3><p>循环导入问题指的是在一个模块加载&#x2F;导入的过程中导入另外一个模块，而在另外一个模块中又返回来导入第一个模块中的名字，由于第一个模块尚未加载完毕，所以引用失败、抛出异常，究其根源就是在python中，同一个模块只会在第一次导入时执行其内部代码，再次导入该模块时，即便是该模块尚未完全加载完毕也不会去重复执行内部代码</p>
+<p><strong>我们以下述文件为例，来详细分析循环&#x2F;嵌套导入出现异常的原因以及解决的方案</strong></p>
+<p>m1.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m1&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> m2 <span class="keyword">import</span> y</span><br><span class="line"></span><br><span class="line">x=<span class="string">&#x27;m1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>m2.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m2&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> m1 <span class="keyword">import</span> x</span><br><span class="line"></span><br><span class="line">y=<span class="string">&#x27;m2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>run.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> m1</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试一</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分析</span></span><br><span class="line">先执行run.py---&gt;执行<span class="keyword">import</span> m1，开始导入m1并运行其内部代码---&gt;打印内容<span class="string">&quot;正在导入m1&quot;</span></span><br><span class="line">---&gt;执行<span class="keyword">from</span> m2 <span class="keyword">import</span> y 开始导入m2并运行其内部代码---&gt;打印内容“正在导入m2”---&gt;执行<span class="keyword">from</span> m1 <span class="keyword">import</span> x,由于m1已经被导入过了，所以不会重新导入，所以直接去m1中拿x，然而x此时并没有存在于m1中，所以报错</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方案一：导入语句放到最后，保证在导入时，所有名字都已经加载过</span></span><br><span class="line"><span class="comment"># 文件：m1.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">x=<span class="string">&#x27;m1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> m2 <span class="keyword">import</span> y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件：m2.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m2&#x27;</span>)</span><br><span class="line">y=<span class="string">&#x27;m2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> m1 <span class="keyword">import</span> x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件：run.py内容如下，执行该文件，可以正常使用</span></span><br><span class="line"><span class="keyword">import</span> m1</span><br><span class="line"><span class="built_in">print</span>(m1.x)</span><br><span class="line"><span class="built_in">print</span>(m1.y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方案二：导入语句放到函数中，只有在调用函数时才会执行其内部代码</span></span><br><span class="line"><span class="comment"># 文件：m1.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f1</span>():</span><br><span class="line">    <span class="keyword">from</span> m2 <span class="keyword">import</span> y</span><br><span class="line">    <span class="built_in">print</span>(x,y)</span><br><span class="line"></span><br><span class="line">x = <span class="string">&#x27;m1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件：m2.py</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;正在导入m2&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f2</span>():</span><br><span class="line">    <span class="keyword">from</span> m1 <span class="keyword">import</span> x</span><br><span class="line">    <span class="built_in">print</span>(x,y)</span><br><span class="line"></span><br><span class="line">y = <span class="string">&#x27;m2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件：run.py内容如下，执行该文件，可以正常使用</span></span><br><span class="line"><span class="keyword">import</span> m1</span><br><span class="line"></span><br><span class="line">m1.f1()</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：循环导入问题大多数情况是因为程序设计失误导致，上述解决方案也只是在烂设计之上的无奈之举，在我们的程序中应该尽量避免出现循环&#x2F;嵌套导入，如果多个模块确实都需要共享某些数据，可以将共享的数据集中存放到某一个地方，然后进行导入</strong></p>
+<h3 id="四-搜索模块的路径与优先级"><a href="#四-搜索模块的路径与优先级" class="headerlink" title="四 搜索模块的路径与优先级"></a>四 搜索模块的路径与优先级</h3><p>模块其实分为四个通用类别，分别是：</p>
+<p>1、使用纯Python代码编写的py文件</p>
+<p>2、包含一系列模块的包</p>
+<p>3、使用C编写并链接到Python解释器中的内置模块</p>
+<p>4、使用C或C++编译的扩展模块</p>
+<p>在导入一个模块时，如果该模块已加载到内存中，则直接引用，否则会优先查找内置模块，然后按照从左到右的顺序依次检索sys.path中定义的路径，直到找模块对应的文件为止，否则抛出异常。sys.path也被称为模块的搜索路径，它是一个列表类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;/Library/Frameworks/Python.framework/Versions/3.5/lib/python35.zip&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5&#x27;</span>,</span><br><span class="line">...,</span><br><span class="line"><span class="string">&#x27;/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>列表中的每个元素其实都可以当作一个目录来看：在列表中会发现有.zip或.egg结尾的文件，二者是不同形式的压缩文件，事实上Python确实支持从一个压缩文件中导入模块，我们也只需要把它们都当成目录去看即可。</p>
+<h3 id="五、区分py文件的两种用途"><a href="#五、区分py文件的两种用途" class="headerlink" title="五、区分py文件的两种用途"></a>五、区分py文件的两种用途</h3><p>一个Python文件有两种用途，一种被当主程序&#x2F;脚本执行，另一种被当模块导入，为了区别同一个文件的不同用途，每个py文件都内置了__name__变量，该变量在py文件被当做脚本执行时赋值为“__main__”,在py文件被当做模块导入时赋值为模块名</p>
+<h3 id="六、编写一个规范的模块"><a href="#六、编写一个规范的模块" class="headerlink" title="六、编写一个规范的模块"></a>六、编写一个规范的模块</h3><p>我们在编写py文件时，需要时刻提醒自己，该文件既是给自己用的，也有可能会被其他人使用，因而代码的可读性与易维护性显得十分重要，为此我们在编写一个模块时最好按照统一的规范去编写，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python #通常只在类unix环境有效,作用是可以使用脚本名来执行，而无需直接调用解释器。</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;The module is used to...&quot;</span> <span class="comment">#模块的文档描述</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys <span class="comment">#导入模块</span></span><br><span class="line"></span><br><span class="line">x=<span class="number">1</span> <span class="comment">#定义全局变量,如果非必须,则最好使用局部变量,这样可以提高代码的易维护性,并且可以节省内存提高性能</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span>: <span class="comment">#定义类,并写好类的注释</span></span><br><span class="line">    <span class="string">&#x27;Class Foo is used to...&#x27;</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(): <span class="comment">#定义函数,并写好函数的注释</span></span><br><span class="line">    <span class="string">&#x27;Function test is used to…&#x27;</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>: <span class="comment">#主程序</span></span><br><span class="line">    test() <span class="comment">#在被当做脚本执行时,执行此处的代码</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="七、软件目录开发规范"><a href="#七、软件目录开发规范" class="headerlink" title="七、软件目录开发规范"></a>七、软件目录开发规范</h3><p>为了提高程序的可读性与可维护性，我们应该为软件设计良好的目录结构，这与规范的编码风格同等重要。软件的目录规范并无硬性标准，只要清晰可读即可，假设你的软件名为foo，笔者推荐目录结构如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Foo/</span><br><span class="line">|-- core/</span><br><span class="line">|   |-- core.py</span><br><span class="line">|</span><br><span class="line">|-- api/</span><br><span class="line">|   |-- api.py</span><br><span class="line">|</span><br><span class="line">|-- db/</span><br><span class="line">|   |-- db_handle.py</span><br><span class="line">|</span><br><span class="line">|-- lib/</span><br><span class="line">|   |-- common.py</span><br><span class="line">|</span><br><span class="line">|-- conf/</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|</span><br><span class="line">|-- run.py</span><br><span class="line">|-- setup.py</span><br><span class="line">|-- requirements.txt</span><br><span class="line">|-- README</span><br></pre></td></tr></table></figure>
+
+<p>简要解释一下:</p>
+<p> • core&#x2F;: 存放业务逻辑相关代码</p>
+<p> • api&#x2F;: 存放接口文件，接口主要用于为业务逻辑提供数据操作。</p>
+<p> • db&#x2F;: 存放操作数据库相关文件，主要用于与数据库交互</p>
+<p> • lib&#x2F;: 存放程序中常用的自定义模块</p>
+<p> • conf&#x2F;: 存放配置文件</p>
+<p> • run.py: 程序的启动文件，一般放在项目的根目录下，因为在运行时会默认将运行文件所在的文件夹作为sys.path的第一个路径，这样就省去了处理环境变量的步骤</p>
+<p> • setup.py: 安装、部署、打包的脚本。</p>
+<p> • requirements.txt: 存放软件依赖的外部Python包列表。</p>
+<p> • README: 项目说明文件。</p>
+<p>除此之外，有一些方案给出了更加多的内容，比如LICENSE.txt,ChangeLog.txt文件等，主要是在项目需要开源时才会用到，请读者自行查阅。</p>
+<p>关于README的内容，这个应该是每个项目都应该有的一个文件，目的是能简要描述该项目的信息，让读者快速了解这个项目。它需要说明以下几个事项:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、软件定位，软件的基本功能；</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、运行代码的方法: 安装环境、启动命令等；</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、简要的使用说明；</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、代码目录结构说明，更详细点可以说明软件的基本原理；</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、常见问题说明。</span><br></pre></td></tr></table></figure>
+
+<p>关于setup.py和requirements.txt：</p>
+<p>一般来说，用setup.py来管理代码的打包、安装、部署问题。业界标准的写法是用Python流行的打包工具setuptools来管理这些事情，这种方式普遍应用于开源项目中。不过这里的核心思想不是用标准化的工具来解决这些问题，而是说，一个项目一定要有一个安装部署工具，能快速便捷的在一台新机器上将环境装好、代码部署好和将程序运行起来。</p>
+<p>requirements.txt文件的存在是为了方便开发者维护软件的依赖库。我们需要将开发过程中依赖库的信息添加进该文件中，避免在 setup.py安装依赖时漏掉软件包，同时也方便了使用者明确项目引用了哪些Python包。</p>
+<p>这个文件的格式是每一行包含一个包依赖的说明，通常是flask&gt;&#x3D;0.10这种格式，要求是这个格式能被pip识别，这样就可以简单的通过 pip install -r requirements.txt来把所有Python依赖库都装好了，具体格式参照<a href="https://link.zhihu.com/?target=https://pip.readthedocs.io/en/1.1/requirements.html">https://pip.readthedocs.io/en/1.1/requirements.html</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2023/12/18/day06/" title="Python模块" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2023/12/18/day06/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/18/day05/" title="Python函数高级"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
