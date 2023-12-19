@@ -17,7 +17,7 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>垃圾回收机制和格式化输出 | Hexo</title>
+  <title>垃圾回收机制和格式化输出 | 秋日诗意</title>
   <meta name="description" content="day04垃圾回收机制解释器在执行到定义变量的语法时，会申请内存空间来存放变量的值，而内存的容量是有限的,这就涉及到变量值所占用内存空间的回收问题，当一个变量值没有用了〈简称垃圾）就应该将其占用的内存给回收掉,那什么样的变量值是没有用的呢?我们定义变量将变量值存起来的目的是为了以后取出来使用，而取得变量值需要通过其绑定的直接引用〈如x&#x3D;10，10被x直接引用)或间接引用(如l&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾回收机制和格式化输出">
@@ -241,7 +241,7 @@
 
   
   
-  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <aside class="sidebar sidebar-toc collapse " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
@@ -396,7 +396,7 @@
     
     
     <li class="toggle-toc">
-      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+      <a class="toggle-btn   collapsed  " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
         <i class="text-collapsed icon icon-anchor"></i>
         <i class="text-in icon icon-close"></i>
         <span>]</span>
@@ -476,7 +476,8 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     distractionFreeMode: true,
     language: 'zh-CN',
     enableHotKey: 'true',
-    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+    proxy:"https://proxy-gitalk-api.netlify.app/github_access_token"
+
   })
   gitalk.render('comments')
   </script>

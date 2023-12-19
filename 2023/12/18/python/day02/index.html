@@ -17,7 +17,7 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>流程控制和容器（1） | Hexo</title>
+  <title>流程控制和容器（1） | 秋日诗意</title>
   <meta name="description" content="day02-代码块12以冒号作为开始,用缩进来划分相同的作用域,这个整体是一个代码块作用域：作用的区域 -流程控制12(1)流程控制的定义(2)流程控制的结构 -分支结构123关键字:if elif else(1)分支结构的种类(2)分支结构的特点 -循环结构1234关键字:while &#x2F; for..in..(1)循环结构的种类(2)循环结构的特点  关键字的使用1pass &#x2F; break &#x2F; c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="流程控制和容器（1）">
@@ -239,7 +239,7 @@
 
   
   
-  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <aside class="sidebar sidebar-toc collapse " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
@@ -404,7 +404,7 @@
     
     
     <li class="toggle-toc">
-      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+      <a class="toggle-btn   collapsed  " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
         <i class="text-collapsed icon icon-anchor"></i>
         <i class="text-in icon icon-close"></i>
         <span>]</span>
@@ -484,7 +484,8 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     distractionFreeMode: true,
     language: 'zh-CN',
     enableHotKey: 'true',
-    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+    proxy:"https://proxy-gitalk-api.netlify.app/github_access_token"
+
   })
   gitalk.render('comments')
   </script>

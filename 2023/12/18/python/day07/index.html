@@ -17,7 +17,7 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>常用模块 | Hexo</title>
+  <title>常用模块 | 秋日诗意</title>
   <meta name="description" content="day07常用模块一 Hash介绍1、什么是哈希hash  hash一类算法，该算法接受传入的内容，经过运算得到一串hash值   hash值的特点：  只要传入的内容一样，得到的hash值必然一样  不能由hash值返解成内容  不管传入的内容有多大，只要使用的hash算法不变，得到的hash值长度是一定的   2、hash的用途 用途1：特点II用于密码密文传输与验证 用途2：特点I、III用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用模块">
@@ -239,7 +239,7 @@
 
   
   
-  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <aside class="sidebar sidebar-toc collapse " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
@@ -389,7 +389,7 @@
     
     
     <li class="toggle-toc">
-      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+      <a class="toggle-btn   collapsed  " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
         <i class="text-collapsed icon icon-anchor"></i>
         <i class="text-in icon icon-close"></i>
         <span>]</span>
@@ -469,7 +469,8 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     distractionFreeMode: true,
     language: 'zh-CN',
     enableHotKey: 'true',
-    proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token'
+    proxy:"https://proxy-gitalk-api.netlify.app/github_access_token"
+
   })
   gitalk.render('comments')
   </script>
