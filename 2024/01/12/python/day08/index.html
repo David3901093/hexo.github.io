@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>ATM——购物车项目 | 秋日诗意</title>
+  <meta name="description" content="ATM——购物车项目项目需求:123456789101.额度15000或自定义     --&gt;  注册功能2.实现购物商城，买东西加入购物车，调用信用卡接口结账  --&gt; 购物功能、支付功能3.可以提现   --&gt; 提现功能4.支持多账户登录  --&gt; 登录功能5.支持账户间转账  --&gt; 转账功能6.记录日常消费 --&gt;  记录流水功能7.提供还款接口 --&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ATM——购物车项目">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2024/01/12/python/day08/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="ATM——购物车项目项目需求:123456789101.额度15000或自定义     --&gt;  注册功能2.实现购物商城，买东西加入购物车，调用信用卡接口结账  --&gt; 购物功能、支付功能3.可以提现   --&gt; 提现功能4.支持多账户登录  --&gt; 登录功能5.支持账户间转账  --&gt; 转账功能6.记录日常消费 --&gt;  记录流水功能7.提供还款接口 --&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-12T09:01:08.889Z">
+<meta property="article:modified_time" content="2024-01-12T09:02:45.334Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2024/01/12/python/day08/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%97%B6%E4%BA%8B%E7%83%AD%E7%82%B9/">时事热点</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E5%9B%9B%E5%85%AD%E7%BA%A7/" rel="tag">四六级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87/" rel="tag">英语作文</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E5%9B%9B%E5%85%AD%E7%BA%A7/" style="font-size: 13px;">四六级</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a> <a href="/hexo.github.io/tags/%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87/" style="font-size: 13px;">英语作文</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2024/01/">一月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/01/12/python/day08/" class="title">ATM——购物车项目</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-12T09:01:08.889Z" itemprop="datePublished">2024-01-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/%E6%97%B6%E4%BA%8B%E7%83%AD%E7%82%B9/">时事热点</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/19/%E6%97%B6%E4%BA%8B%E7%83%AD%E7%82%B9/%E8%B0%88%E4%B8%80%E8%B0%88%E8%AE%A9%E5%A4%A7%E5%AD%A6%E7%94%9F%E2%80%9C%E6%8A%95%E9%99%8D%E2%80%9D%E7%9A%84%E2%80%9Csubmission%E2%80%9D/" class="title">谈一谈让大学生“投降”的“submission”</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-19T08:50:17.913Z" itemprop="datePublished">2023-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/python/day06/" class="title">Python模块</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.580Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/python/day05/" class="title">Python函数高级</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.577Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2023/12/18/python/day04/" class="title">垃圾回收机制和格式化输出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-18T07:47:48.574Z" itemprop="datePublished">2023-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ATM%E2%80%94%E2%80%94%E8%B4%AD%E7%89%A9%E8%BD%A6%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">ATM——购物车项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82"><span class="toc-number">1.0.1.</span> <span class="toc-text">项目需求:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">软件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.3.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#src-py"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">src.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#user-service-py"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">user_service.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#goods-service-py"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">goods_service.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#user-dao-py"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">user_dao.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#goods-dao-py"><span class="toc-number">1.0.3.5.</span> <span class="toc-text">goods_dao.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#md5-utils-py"><span class="toc-number">1.0.3.6.</span> <span class="toc-text">md5_utils.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wrapper-py-%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">1.0.3.7.</span> <span class="toc-text">wrapper.py(装饰器)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#settings-py"><span class="toc-number">1.0.3.8.</span> <span class="toc-text">settings.py</span></a></li></ol></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-python/day08" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ATM——购物车项目
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2024/01/12/python/day08/" class="article-date">
+	  <time datetime="2024-01-12T09:01:08.889Z" itemprop="datePublished">2024-01-12</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2024/01/12/python/day08/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="ATM——购物车项目"><a href="#ATM——购物车项目" class="headerlink" title="ATM——购物车项目"></a>ATM——购物车项目</h1><h3 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求:"></a>项目需求:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.额度15000或自定义     --&gt;  注册功能</span><br><span class="line">2.实现购物商城，买东西加入购物车，调用信用卡接口结账  --&gt; 购物功能、支付功能</span><br><span class="line">3.可以提现   --&gt; 提现功能</span><br><span class="line">4.支持多账户登录  --&gt; 登录功能</span><br><span class="line">5.支持账户间转账  --&gt; 转账功能</span><br><span class="line">6.记录日常消费 --&gt;  记录流水功能</span><br><span class="line">7.提供还款接口 --&gt;  还款功能</span><br><span class="line">8.ATM记录操作日志 --&gt; 记录日志功能</span><br><span class="line">9.提供管理接口，包括添加账户、用户额度，冻结账户等。。。 ---&gt; 管理员功能</span><br><span class="line">10.用户认证用装饰器  --&gt; 登录认证装饰器</span><br></pre></td></tr></table></figure>
+
+<h3 id="软件目录"><a href="#软件目录" class="headerlink" title="软件目录"></a>软件目录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ATM/</span><br><span class="line">|-- core/</span><br><span class="line">|   |-- src.py <span class="comment"># 视图层</span></span><br><span class="line">|</span><br><span class="line">|-- service/</span><br><span class="line">|   |-- goods_service.py</span><br><span class="line">|   |-- user_service.py</span><br><span class="line">|</span><br><span class="line">|-- dao/</span><br><span class="line">|   |-- goods_dao.py</span><br><span class="line">|   |-- user_dao.py</span><br><span class="line">|</span><br><span class="line">|-- db/</span><br><span class="line">|   |--user_data</span><br><span class="line">|        |--username.json</span><br><span class="line">|</span><br><span class="line">|-- utils/</span><br><span class="line">|   |-- common.py</span><br><span class="line">|</span><br><span class="line">|-- conf/</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|</span><br><span class="line">|-- run.py</span><br><span class="line">|-- README</span><br></pre></td></tr></table></figure>
+
+<p>简要解释一下:</p>
+<p> • core&#x2F;: 存放业务逻辑相关代码</p>
+<p> • api&#x2F;: 存放接口文件，接口主要用于为业务逻辑提供数据操作。</p>
+<p> • db&#x2F;: 存放操作数据库相关文件，主要用于与数据库交互</p>
+<p> • utils&#x2F;: 存放程序中常用的自定义模块</p>
+<p> • conf&#x2F;: 存放配置文件</p>
+<p> • run.py: 程序的启动文件，一般放在项目的根目录下，因为在运行时会默认将运行文件所在的文件夹作为sys.path的第一个路径，这样就省去了处理环境变量的步骤</p>
+<p> • README: 项目说明文件。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="src-py"><a href="#src-py" class="headerlink" title="src.py"></a>src.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> service <span class="keyword">import</span> user_service</span><br><span class="line"><span class="keyword">from</span> service <span class="keyword">import</span> goods_service</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> wrapper</span><br><span class="line"></span><br><span class="line">user = <span class="literal">None</span>  <span class="comment"># 全局用户变量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入您的账号&quot;</span>).strip()</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入您的密码&quot;</span>).strip()</span><br><span class="line">    verify_password = <span class="built_in">input</span>(<span class="string">&quot;请再次确认您的密码&quot;</span>).strip()</span><br><span class="line">    <span class="keyword">while</span> password != verify_password:</span><br><span class="line">        verify_password = <span class="built_in">input</span>(<span class="string">&quot;两次密码不一致，请重新输入&quot;</span>)</span><br><span class="line">    balance = <span class="built_in">input</span>(<span class="string">&quot;请输入您的初始存款数额(元),默认1500元&quot;</span>).strip()</span><br><span class="line">    <span class="keyword">if</span> balance == <span class="string">&quot;&quot;</span>:</span><br><span class="line">        balance = <span class="number">1500.0</span></span><br><span class="line">    res = user_service.reg(username, password, balance)</span><br><span class="line">    <span class="keyword">if</span> res:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;注册成功，请登录系统&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;注册失败，请重试&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入您的账号&quot;</span>).strip()</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入您的密码&quot;</span>).strip()</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    user = user_service.login(username, password)</span><br><span class="line">    <span class="keyword">if</span> user == <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用户名或密码不正确，登录失败&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;欢迎<span class="subst">&#123;username&#125;</span>登录，请继续&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_balance</span>():</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    username = user.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">    balance = user.get(<span class="string">&quot;balance&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(username + <span class="string">&quot;余额为&quot;</span> + <span class="built_in">str</span>(balance) + <span class="string">&quot;元&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">withdraw</span>():</span><br><span class="line">    money = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入您的取款金额&quot;</span>))</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    res = user_service.withdraw(user, money)</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pay_back</span>():</span><br><span class="line">    money = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入您的取款金额&quot;</span>))</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    res = user_service.pay_back(user, money)</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transfer</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入对方的账户&quot;</span>)</span><br><span class="line">    money = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入您的转账金额&quot;</span>))</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    res = user_service.transfer(user, username, money)</span><br><span class="line">    <span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_flow</span>():</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    username = user.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">    user = user_service.getInfo(username)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> user.get(<span class="string">&quot;flow&quot;</span>):</span><br><span class="line">        <span class="built_in">print</span>(line)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">shopping</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;欢迎光临机蜂商城，商品如下，祝您购物愉快！&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;序号\t商品编号\t商品名称\t商品价格&quot;</span>)</span><br><span class="line">    goods = goods_service.<span class="built_in">list</span>()</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    cart = user.get(<span class="string">&quot;cart&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(goods)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="built_in">str</span>(i) + <span class="string">&quot;\t&quot;</span> + goods[i].get(<span class="string">&quot;no&quot;</span>) + <span class="string">&quot;\t&quot;</span> + goods[i].get(<span class="string">&quot;goodsName&quot;</span>) + <span class="string">&quot;\t&quot;</span> + <span class="built_in">str</span>(</span><br><span class="line">                goods[i].get(<span class="string">&quot;goodsPrice&quot;</span>)))</span><br><span class="line">        no = <span class="built_in">input</span>(<span class="string">&quot;请输入序号：Y 结账 N 放入购物车 &quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> no.upper() == <span class="string">&quot;y&quot;</span>.upper():</span><br><span class="line">            money = goods_service.<span class="built_in">sum</span>(cart)</span><br><span class="line">            res = user_service.withdraw(user, money)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;拟支付&quot;</span> + <span class="built_in">str</span>(money) + <span class="string">&quot;元.......&quot;</span> + res)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> no.upper() == <span class="string">&quot;N&quot;</span>.upper():</span><br><span class="line">            user[<span class="string">&quot;cart&quot;</span>] = cart</span><br><span class="line">            user_service.update_user(user)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            no = <span class="built_in">int</span>(no)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(goods) &gt; no &gt; <span class="number">0</span>:</span><br><span class="line">                cart.append(goods[no])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;没有该商品，请重新选择&quot;</span>)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">shopping_cart</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;购物车中的商品列表如下：&quot;</span>)</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    cart = user.get(<span class="string">&quot;cart&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(cart) == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;购物车为空！&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> cart:</span><br><span class="line">            <span class="built_in">print</span>(item)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit</span>():</span><br><span class="line">    sys.exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line">    choice_dict = &#123;</span><br><span class="line">        <span class="string">&quot;1&quot;</span>: register,</span><br><span class="line">        <span class="string">&quot;2&quot;</span>: login,</span><br><span class="line">        <span class="string">&quot;3&quot;</span>: check_balance,</span><br><span class="line">        <span class="string">&quot;4&quot;</span>: withdraw,</span><br><span class="line">        <span class="string">&quot;5&quot;</span>: pay_back,</span><br><span class="line">        <span class="string">&quot;6&quot;</span>: transfer,</span><br><span class="line">        <span class="string">&quot;7&quot;</span>: check_flow,</span><br><span class="line">        <span class="string">&quot;8&quot;</span>: shopping,</span><br><span class="line">        <span class="string">&quot;9&quot;</span>: shopping_cart,</span><br><span class="line">        <span class="string">&quot;10&quot;</span>: exit</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">————————机蜂商城购物系统——————————————</span></span><br><span class="line"><span class="string">        1、注册功能</span></span><br><span class="line"><span class="string">        2、登录功能</span></span><br><span class="line"><span class="string">        3、查看余额</span></span><br><span class="line"><span class="string">        4、提现功能</span></span><br><span class="line"><span class="string">        5、还款功能</span></span><br><span class="line"><span class="string">        6、转账功能</span></span><br><span class="line"><span class="string">        7、查看流水</span></span><br><span class="line"><span class="string">        8、购物功能</span></span><br><span class="line"><span class="string">        9、查看购物车</span></span><br><span class="line"><span class="string">        10 退出系统</span></span><br><span class="line"><span class="string">————————————————end——————————————————————</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span>)</span><br><span class="line">        <span class="comment"># 用字典实现switch-case</span></span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请输入操作序号&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">not</span> <span class="keyword">in</span> choice_dict:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;出现非法输入，请重新确认！&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        choice_dict[choice]()</span><br></pre></td></tr></table></figure>
+
+<h4 id="user-service-py"><a href="#user-service-py" class="headerlink" title="user_service.py"></a>user_service.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> user_dao</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;用户注册&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reg</span>(<span class="params">username, password, balance</span>):</span><br><span class="line">    flag = user_dao.has_user(username)</span><br><span class="line">    <span class="keyword">if</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用户已存在，请重新注册！&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        user_dict = &#123;</span><br><span class="line">            <span class="string">&quot;username&quot;</span>: username,</span><br><span class="line">            <span class="string">&quot;password&quot;</span>: md5_utils.str2md5(password),</span><br><span class="line">            <span class="string">&quot;balance&quot;</span>: balance,</span><br><span class="line">            <span class="string">&quot;cart&quot;</span>: [],  <span class="comment"># 购物车</span></span><br><span class="line">            <span class="string">&quot;flow&quot;</span>: [],  <span class="comment"># 流水记录</span></span><br><span class="line">            <span class="string">&quot;is_lock&quot;</span>: <span class="literal">False</span>  <span class="comment"># 是否禁用</span></span><br><span class="line">        &#125;</span><br><span class="line">        res = user_dao.insert(user_dict)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>(<span class="params">username, password</span>) -&gt; <span class="built_in">dict</span>:</span><br><span class="line">    flag = user_dao.has_user(username)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    user = user_dao.selectUserByUsername(username)</span><br><span class="line">    <span class="comment"># 加密用户密码比对</span></span><br><span class="line">    <span class="keyword">if</span> user.get(<span class="string">&quot;username&quot;</span>) == username <span class="keyword">and</span> md5_utils.str2md5(password) == user.get(<span class="string">&quot;password&quot;</span>):</span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">withdraw</span>(<span class="params">user_dict: <span class="built_in">dict</span>, money: <span class="built_in">float</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    balance = <span class="built_in">float</span>(user_dict.get(<span class="string">&quot;balance&quot;</span>))</span><br><span class="line">    username = user_dict[<span class="string">&quot;username&quot;</span>]</span><br><span class="line">    <span class="keyword">if</span> money &lt; balance:</span><br><span class="line">        balance -= money</span><br><span class="line">        user_dict[<span class="string">&quot;balance&quot;</span>] = balance</span><br><span class="line">        user_dict[<span class="string">&quot;cart&quot;</span>]=&#123;&#125;</span><br><span class="line">        <span class="comment"># 获取当前日期时间，并转换成字符串格式</span></span><br><span class="line">        now = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)</span><br><span class="line">        <span class="comment"># 更新用户流水</span></span><br><span class="line">        msg = <span class="string">f&quot;用户<span class="subst">&#123;username&#125;</span>于<span class="subst">&#123;now&#125;</span>取款<span class="subst">&#123;money&#125;</span>元&quot;</span></span><br><span class="line">        user_dict[<span class="string">&quot;flow&quot;</span>].append(msg)</span><br><span class="line">        <span class="comment"># 更新用户字典</span></span><br><span class="line">        user_dao.insert(user_dict)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;取款成功,余额为<span class="subst">&#123;balance&#125;</span>元:&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;余额不足，请充值&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pay_back</span>(<span class="params">user_dict: <span class="built_in">dict</span>, money: <span class="built_in">float</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;充值现金&#x27;&#x27;&#x27;</span></span><br><span class="line">    balance = <span class="built_in">float</span>(user_dict.get(<span class="string">&quot;balance&quot;</span>))</span><br><span class="line">    username = user_dict.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">    money += balance</span><br><span class="line">    user_dict[<span class="string">&quot;balance&quot;</span>] = balance</span><br><span class="line">    <span class="comment"># 获取当前日期时间，并转换成字符串格式</span></span><br><span class="line">    now = datetime.datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">    <span class="comment"># 记录流水</span></span><br><span class="line">    msg = <span class="string">f&quot;用户<span class="subst">&#123;username&#125;</span>于<span class="subst">&#123;now&#125;</span> 充值<span class="subst">&#123;money&#125;</span>元&quot;</span></span><br><span class="line">    <span class="comment"># 更新流水</span></span><br><span class="line">    user_dict[<span class="string">&quot;flow&quot;</span>].append(msg)</span><br><span class="line">    user_dao.insert(user_dict)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;充值成功&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transfer</span>(<span class="params">from_user, to_username, money: <span class="built_in">float</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;转账&#x27;&#x27;&#x27;</span></span><br><span class="line">    from_username = from_user.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">    balance = <span class="built_in">float</span>(from_user.get(<span class="string">&quot;balance&quot;</span>))</span><br><span class="line">    <span class="keyword">if</span> money &gt; balance:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;余额不足，无法发起转账&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 如果用户存在</span></span><br><span class="line">        <span class="keyword">if</span> user_dao.has_user(to_username):</span><br><span class="line">            to_user = user_dao.selectUserByUsername(to_username)</span><br><span class="line">            balance_2 = to_user[<span class="string">&quot;balance&quot;</span>]</span><br><span class="line">            balance_2 = <span class="built_in">float</span>(balance_2) + balance</span><br><span class="line">            to_user[<span class="string">&quot;balance&quot;</span>] = balance_2</span><br><span class="line">            <span class="comment"># 获取当前日期时间，并转换成字符串格式</span></span><br><span class="line">            now = datetime.datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">            <span class="comment"># 更新用户流水</span></span><br><span class="line">            from_user[<span class="string">&quot;flow&quot;</span>].append(<span class="string">f&#x27;<span class="subst">&#123;from_username&#125;</span>于<span class="subst">&#123;now&#125;</span>向<span class="subst">&#123;to_username&#125;</span>汇款<span class="subst">&#123;money&#125;</span>元&#x27;</span>)</span><br><span class="line">            to_user[<span class="string">&quot;flow&quot;</span>].append(<span class="string">f&#x27;<span class="subst">&#123;to_username&#125;</span>于<span class="subst">&#123;now&#125;</span>收到<span class="subst">&#123;from_username&#125;</span>汇款<span class="subst">&#123;money&#125;</span>元&#x27;</span>)</span><br><span class="line">            <span class="comment"># 更新数据</span></span><br><span class="line">            user_dao.insert(from_user)</span><br><span class="line">            user_dao.insert(to_user)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;转账成功&quot;</span></span><br><span class="line">        <span class="comment"># 不存在</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;用户不存在，无法进行转账业务&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getInfo</span>(<span class="params">username</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;根据用户名获取用户信息&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> user_dao.selectUserByUsername(username)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_user</span>(<span class="params">user_dict</span>):</span><br><span class="line">    user_dao.insert(user_dict)</span><br></pre></td></tr></table></figure>
+
+<h4 id="goods-service-py"><a href="#goods-service-py" class="headerlink" title="goods_service.py"></a>goods_service.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> goods_dao</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">list</span>():</span><br><span class="line">    <span class="keyword">return</span> goods_dao.select_goods()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum</span>(<span class="params">cart</span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">    price = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> good <span class="keyword">in</span> cart:</span><br><span class="line">        price += good.get(<span class="string">&quot;goodsPrice&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> price</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="user-dao-py"><a href="#user-dao-py" class="headerlink" title="user_dao.py"></a>user_dao.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">has_user</span>(<span class="params">username</span>)-&gt;<span class="built_in">bool</span>:</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;判断用户是否存在&#x27;&#x27;&#x27;</span></span><br><span class="line">    user_path=os.path.join(settings.BASE_PATH,<span class="string">f&#x27;<span class="subst">&#123;username&#125;</span>.json&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(user_path):</span><br><span class="line">       <span class="keyword">with</span> <span class="built_in">open</span>(user_path,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">           user_dict=json.load(f)</span><br><span class="line">           <span class="keyword">if</span> user_dict:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span>      </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">user_dict</span>)-&gt;<span class="built_in">bool</span>:</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;插入用户&#x27;&#x27;&#x27;</span></span><br><span class="line">    username=user_dict.get(<span class="string">&quot;username&quot;</span>)</span><br><span class="line">    user_path=os.path.join(settings.BASE_PATH,<span class="string">f&#x27;<span class="subst">&#123;username&#125;</span>.json&#x27;</span>)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(user_path,mode=<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        json.dump(user_dict,f,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">selectUserByUsername</span>(<span class="params">username</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;根据用户名和密码查询用户&#x27;&#x27;&#x27;</span></span><br><span class="line">    user_path=os.path.join(settings.BASE_PATH,<span class="string">f&#x27;<span class="subst">&#123;username&#125;</span>.json&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(user_path):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(user_path,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">               user_dict=json.load(f)</span><br><span class="line">                <span class="keyword">return</span> user_dict</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="goods-dao-py"><a href="#goods-dao-py" class="headerlink" title="goods_dao.py"></a>goods_dao.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_goods</span>()-&gt;<span class="built_in">list</span>:</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;读取商品列表&#x27;&#x27;&#x27;</span></span><br><span class="line">    user_path=os.path.join(settings.DATA_PATH,<span class="string">&#x27;goods.json&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(user_path):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(user_path,mode=<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&quot;utf8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            goods_list=json.load(f)</span><br><span class="line">            <span class="keyword">return</span> goods_list</span><br></pre></td></tr></table></figure>
+
+<h4 id="md5-utils-py"><a href="#md5-utils-py" class="headerlink" title="md5_utils.py"></a>md5_utils.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">str2md5</span>(<span class="params"><span class="built_in">str</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;使用MD5对字符串进行加密</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        str (str): 需要加密的字符串</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        [str]: 32位字符串</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span> </span><br><span class="line">    m = hashlib.md5()  <span class="comment"># 创建md5对象</span></span><br><span class="line">    </span><br><span class="line">    str_en = <span class="built_in">str</span>.encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># str必须先encode</span></span><br><span class="line">    m.update(str_en)  <span class="comment"># 传入字符串并加密</span></span><br><span class="line">    str_md5 = m.hexdigest()  <span class="comment"># 将MD5 hash值转换为16进制数字字符串</span></span><br><span class="line">    <span class="keyword">return</span> str_md5</span><br></pre></td></tr></table></figure>
+
+<h4 id="wrapper-py-装饰器"><a href="#wrapper-py-装饰器" class="headerlink" title="wrapper.py(装饰器)"></a>wrapper.py(装饰器)</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">login_wrapper</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">from</span> core <span class="keyword">import</span> src</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        <span class="keyword">if</span> src.user:</span><br><span class="line">            res=func(*args,**kwargs)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;您尚未登录，请先登录&quot;</span>)</span><br><span class="line">            src.login()</span><br><span class="line">            res=func(*args,**kwargs)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">BASE_PATH=<span class="string">&quot;D:\\py\\day13-ATM\\db\\user_data&quot;</span></span><br><span class="line">DATA_PATH=<span class="string">&quot;D:\\py\\day13-ATM\\db&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2024/01/12/python/day08/" title="ATM——购物车项目" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2024/01/12/python/day08/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2023/12/19/%E6%97%B6%E4%BA%8B%E7%83%AD%E7%82%B9/%E8%B0%88%E4%B8%80%E8%B0%88%E8%AE%A9%E5%A4%A7%E5%AD%A6%E7%94%9F%E2%80%9C%E6%8A%95%E9%99%8D%E2%80%9D%E7%9A%84%E2%80%9Csubmission%E2%80%9D/" title="谈一谈让大学生“投降”的“submission”"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn   collapsed  " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy:"https://proxy-gitalk-api.netlify.app/github_access_token"
+
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
