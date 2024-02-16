@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>教务管理系统 | 秋日诗意</title>
+  <meta name="description" content="项目：教务管理系统项目需求:角色:学校、学员、课程、讲师 要求:  创建北京、上海 2 所学校 创建linux , python , go 3个课程 ， linux\py 在北京开， go 在上海开 课程包含，周期，价格，通过学校创建课程 通过学校创建班级， 班级关联课程、讲师 创建学员时，选择学校，关联班级 创建讲师角色时要关联学校， 提供两个角色接口6.1 学员视图， 可以注册， 交学费， 选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="教务管理系统">
+<meta property="og:url" content="https://david3901093.github.io/hexo.github.io/2024/02/16/python/day12/index.html">
+<meta property="og:site_name" content="秋日诗意">
+<meta property="og:description" content="项目：教务管理系统项目需求:角色:学校、学员、课程、讲师 要求:  创建北京、上海 2 所学校 创建linux , python , go 3个课程 ， linux\py 在北京开， go 在上海开 课程包含，周期，价格，通过学校创建课程 通过学校创建班级， 班级关联课程、讲师 创建学员时，选择学校，关联班级 创建讲师角色时要关联学校， 提供两个角色接口6.1 学员视图， 可以注册， 交学费， 选">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-16T04:17:40.046Z">
+<meta property="article:modified_time" content="2024-02-16T04:44:36.236Z">
+<meta property="article:author" content="David Ge">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://david3901093.github.io/hexo.github.io/2024/02/16/python/day12/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/hexo.github.io/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/david3901093.github.io" target="_blank">
+          <img class="img-circle img-rotate" src="/hexo.github.io/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">秋天的怀念</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java 程序员 &amp; Teacher</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 中国江苏</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form" method="GET" action="https://www.baidu.com/s?">
+	<div class="input-group">
+    	<input name="wd" type="text" class="form-control search-form-input" placeholder="搜索" />
+	    <span class="input-group-btn">
+	    	<button type="submit" class=" btn btn-flat search-form-submit"><i class="icon icon-search"></i></button>
+	    </span>
+    </div>
+</form>
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">个性签名</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>常带一卷书生气，妙笔生花写传奇</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/Python/">Python</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%95%99%E4%B9%A6%E7%90%90%E8%AE%B0/">教书琐记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E6%97%B6%E4%BA%8B%E7%83%AD%E7%82%B9/">时事热点</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/hexo.github.io/categories/%E7%94%9F%E6%B4%BB%E7%82%B9%E6%BB%B4/">生活点滴</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E4%BA%B2%E6%83%85/" rel="tag">亲情</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E5%9B%9B%E5%85%AD%E7%BA%A7/" rel="tag">四六级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E5%A4%96%E5%A9%86/" rel="tag">外婆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" rel="tag">毕业留言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo.github.io/tags/%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87/" rel="tag">英语作文</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/hexo.github.io/tags/Python/" style="font-size: 14px;">Python</a> <a href="/hexo.github.io/tags/%E4%BA%B2%E6%83%85/" style="font-size: 13px;">亲情</a> <a href="/hexo.github.io/tags/%E5%9B%9B%E5%85%AD%E7%BA%A7/" style="font-size: 13px;">四六级</a> <a href="/hexo.github.io/tags/%E5%A4%96%E5%A9%86/" style="font-size: 13px;">外婆</a> <a href="/hexo.github.io/tags/%E6%AF%95%E4%B8%9A%E7%95%99%E8%A8%80/" style="font-size: 13px;">毕业留言</a> <a href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 14px;">编程</a> <a href="/hexo.github.io/tags/%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87/" style="font-size: 13px;">英语作文</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2024/02/">二月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2024/01/">一月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo.github.io/archives/2023/12/">十二月 2023</a><span class="archive-list-count">9</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/02/16/python/day12/" class="title">教务管理系统</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-02-16T04:17:40.046Z" itemprop="datePublished">2024-02-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/02/16/python/Python%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="title">Python命名规范</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-02-16T03:28:48.552Z" itemprop="datePublished">2024-02-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/02/05/python/day11/" class="title">继承与派生</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-02-05T03:07:43.513Z" itemprop="datePublished">2024-02-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/02/05/python/day10/" class="title">封装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-02-05T02:10:44.967Z" itemprop="datePublished">2024-02-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/hexo.github.io/categories/Python/">Python</a>
+              </p>
+              <p class="item-title">
+                <a href="/hexo.github.io/2024/01/27/python/day09/" class="title">面向对象</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-01-27T13:09:10.858Z" itemprop="datePublished">2024-01-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%95%99%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">项目：教务管理系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82"><span class="toc-number"></span> <span class="toc-text">项目需求:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#run-py"><span class="toc-number">0.1.</span> <span class="toc-text">run.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%B1%82-%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%B1%82"><span class="toc-number">0.2.</span> <span class="toc-text">视图层&amp;业务逻辑层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#admin"><span class="toc-number">0.2.1.</span> <span class="toc-text">admin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#student"><span class="toc-number">0.2.2.</span> <span class="toc-text">student</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#teacher"><span class="toc-number">0.2.3.</span> <span class="toc-text">teacher</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">0.3.</span> <span class="toc-text">登录装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E5%B1%82"><span class="toc-number">0.4.</span> <span class="toc-text">数据访问层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">总结</span></a>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-python/day12" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      教务管理系统
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/hexo.github.io/2024/02/16/python/day12/" class="article-date">
+	  <time datetime="2024-02-16T04:17:40.046Z" itemprop="datePublished">2024-02-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/hexo.github.io/categories/Python/">Python</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/hexo.github.io/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/hexo.github.io/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/hexo.github.io/2024/02/16/python/day12/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 16(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="项目：教务管理系统"><a href="#项目：教务管理系统" class="headerlink" title="项目：教务管理系统"></a>项目：教务管理系统</h2><h1 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求:"></a>项目需求:</h1><p>角色:学校、学员、课程、讲师</p>
+<p>要求:</p>
+<ol>
+<li>创建北京、上海 2 所学校</li>
+<li>创建linux , python , go 3个课程 ， linux\py 在北京开， go 在上海开</li>
+<li>课程包含，周期，价格，通过学校创建课程</li>
+<li>通过学校创建班级， 班级关联课程、讲师</li>
+<li>创建学员时，选择学校，关联班级</li>
+<li>创建讲师角色时要关联学校， 提供两个角色接口<br>6.1 学员视图， 可以注册， 交学费， 选择班级，<br>6.2 讲师视图， 讲师可管理自己的班级， 上课时选择班级， 查看班级学员列表 ， 修改所管理的学员的成绩<br>6.3 管理视图，创建讲师，创建班级，创建课程</li>
+<li>上面的操作产生的数据都通过pickle序列化保存到文件里<br>2、程序的架构设计</li>
+</ol>
+<pre><code>- 三层架构
+    - 用户视图层
+        - 用于与用户进行交互的
+        - 小的逻辑判断,比如注册功能中两次密码是否一致的校验
+        - core
+            - run.py  主视图
+            - admin_view.py
+                admin_view
+            - student_view.py
+                student_view
+            - teacher_view.py
+                teacher_view
+</code></pre>
+<ul>
+<li>数据处理层<br>  - 做数据的处理，比如数据的 增、删、查、改<br>  - db<br>      - models.py<br>      - db_handler.py<br>          - ATM + 购物车<br>              - 存放 json格式的数据<br>              - dict –&gt; json<br><br>          - 选课系统(******)<br>              - pickle 保存对象<br>              - object —&gt; pickle</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h3 id="run-py"><a href="#run-py" class="headerlink" title="run.py"></a>run.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> view <span class="keyword">import</span> admin_view</span><br><span class="line"><span class="keyword">from</span> view <span class="keyword">import</span> student_view</span><br><span class="line"><span class="keyword">from</span> view <span class="keyword">import</span> teacher_view</span><br><span class="line"><span class="comment"># 主入口：选择相应身份登录</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您的身份 1.管理员 2.学生 3.讲师 其他.退出&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">    <span class="keyword">if</span> choice == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        admin_view.run()</span><br><span class="line">    <span class="keyword">elif</span> choice == <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">        student_view.run()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> choice == <span class="string">&#x27;3&#x27;</span>:</span><br><span class="line">        teacher_view.run()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;退出成功&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="视图层-业务逻辑层"><a href="#视图层-业务逻辑层" class="headerlink" title="视图层&amp;业务逻辑层"></a>视图层&amp;业务逻辑层</h3><h4 id="admin"><a href="#admin" class="headerlink" title="admin"></a><strong>admin</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> People</span><br><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> Teacher</span><br><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> Course</span><br><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> Clazz</span><br><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> School</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> UserDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> SchoolDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> CourseDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> ClazzDao</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils <span class="keyword">as</span> md5Utils</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> wrapper</span><br><span class="line">user = <span class="literal">None</span></span><br><span class="line"><span class="comment"># 主程序入口</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line"></span><br><span class="line">    menulist = [<span class="string">&#x27;1. 登录&#x27;</span>, <span class="string">&#x27;2. 注册&#x27;</span>, <span class="string">&#x27;3. 退出&#x27;</span>]</span><br><span class="line">    optitos =&#123;<span class="string">&#x27;1&#x27;</span>:login,<span class="string">&#x27;2&#x27;</span>:register,<span class="string">&#x27;3&#x27;</span>:exit_sys&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;欢迎使用机蜂学园后台管理系统&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">        <span class="keyword">for</span> menu <span class="keyword">in</span> menulist:</span><br><span class="line">            <span class="built_in">print</span>(menu)</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">            optitos[choice]()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员登录</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入用户名：&quot;</span>)</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    user=UserDao.UserDao.get(username,password)</span><br><span class="line">    <span class="comment"># print(user)</span></span><br><span class="line">    <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用户名或密码错误&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;登录成功&quot;</span>)</span><br><span class="line">        showMenu()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员注册</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;请输入用户名：&quot;</span>)</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">    age =  <span class="built_in">input</span>(<span class="string">&quot;请输入年龄：1-100&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;请输入性别：&quot;</span>)</span><br><span class="line">    password = md5Utils.str2md5(password)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> age.isdigit() <span class="keyword">or</span> (<span class="built_in">int</span>(age) <span class="keyword">not</span> <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>)):</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;年龄必须为整数，且在1到100之间&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> sex <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;女&#x27;</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;性别必须为男或女&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> UserDao.UserDao.hasPeople(name):</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;用户名已被使用,请重新注册&quot;</span>)</span><br><span class="line">         <span class="keyword">return</span></span><br><span class="line">    p = People.People(name,password,age,sex,role=<span class="string">&#x27;管理员&#x27;</span>)</span><br><span class="line">    UserDao.UserDao.insert(p)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;注册成功&quot;</span>)</span><br><span class="line"><span class="comment"># 退出系统</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit_sys</span>():</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员菜单</span></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;admin&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">showMenu</span>():</span><br><span class="line">     optitos = &#123;<span class="string">&#x27;1&#x27;</span>: createTeacher, <span class="string">&#x27;2&#x27;</span>: createClass, <span class="string">&#x27;3&#x27;</span>: createCource, <span class="string">&#x27;4&#x27;</span>: exit_sys&#125;</span><br><span class="line">     <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;欢迎登录机蜂学园后台管理系统&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;1. 创建讲师&quot;</span>)</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;2. 创建班级&quot;</span>)</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;3. 创建课程&quot;</span>)</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;4. 退出&quot;</span>)</span><br><span class="line">         choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">         <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">             optitos[choice]()</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"><span class="comment"># 创建讲师</span></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;admin&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">createTeacher</span>():</span><br><span class="line">     name = <span class="built_in">input</span>(<span class="string">&quot;请输入讲师姓名：&quot;</span>)</span><br><span class="line">     password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">     age =  <span class="built_in">input</span>(<span class="string">&quot;请输入年龄：1-100&quot;</span>)</span><br><span class="line">     sex = <span class="built_in">input</span>(<span class="string">&quot;请输入性别：&quot;</span>)</span><br><span class="line">     password = md5Utils.str2md5(password)</span><br><span class="line">     <span class="keyword">while</span> <span class="keyword">not</span> age.isdigit() <span class="keyword">or</span> (<span class="built_in">int</span>(age) <span class="keyword">not</span> <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>)):</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;年龄必须为整数，且在1到100之间&quot;</span>)</span><br><span class="line">     <span class="keyword">while</span> sex <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;女&#x27;</span>]:</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;性别必须为男或女&quot;</span>)</span><br><span class="line">     <span class="keyword">if</span> UserDao.UserDao.hasPeople(name):</span><br><span class="line">         <span class="built_in">print</span>(<span class="string">&quot;用户名已被使用,请重新注册&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">     school_name = <span class="built_in">input</span>(<span class="string">&quot;请输入学校代号：1 上海 2 北京&quot;</span>)</span><br><span class="line">     school_dict = &#123;<span class="string">&#x27;1&#x27;</span>: <span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;2&#x27;</span>: <span class="string">&#x27;北京&#x27;</span>&#125;</span><br><span class="line">     school_name = school_dict[school_name]</span><br><span class="line">     school = School.School(school_name)</span><br><span class="line">     p = Teacher.Teacher(name,password,sex,age,school,role=<span class="string">&#x27;讲师&#x27;</span>)</span><br><span class="line">     UserDao.UserDao.insert(p)</span><br><span class="line">     <span class="built_in">print</span>(<span class="string">&quot;创建成功&quot;</span>)</span><br><span class="line">     <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;admin&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">createCourse</span>():</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;请输入课程名称：&quot;</span>)</span><br><span class="line">    price = <span class="built_in">input</span>(<span class="string">&quot;请输入价格：&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> price.isdigit():</span><br><span class="line">        price= <span class="built_in">input</span>(<span class="string">&quot;价格必须为数字&quot;</span>)</span><br><span class="line">    period = <span class="built_in">input</span>(<span class="string">&quot;请输入课程时长（如 6个月/1年）：&quot;</span>)</span><br><span class="line">    cource = Course.Course(name,price,period)</span><br><span class="line">    CourseDao.CourseDao.insert(cource)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;创建成功&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;admin&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">createClass</span>():</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">     1. 输入班级名称 班级和课程绑定，班级和学校绑定，和教师绑定</span></span><br><span class="line"><span class="string">     2. 输入课程名称</span></span><br><span class="line"><span class="string">     3. 输入学校名称</span></span><br><span class="line"><span class="string">     4. 输入讲师姓名</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    class_name = <span class="built_in">input</span>(<span class="string">&quot;请输入班级名称：&quot;</span>)</span><br><span class="line">    courae_name = <span class="built_in">input</span>(<span class="string">&quot;请输入课程名称：&quot;</span>)</span><br><span class="line">    course=CourseDao.CourseDao.get(courae_name)</span><br><span class="line">    <span class="keyword">if</span> course <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请先创建课程&quot;</span>)</span><br><span class="line">        createCource()</span><br><span class="line">    school_name = <span class="built_in">input</span>(<span class="string">&quot;请输入学校代号：1 上海 2 北京&quot;</span>)</span><br><span class="line">    school_dict=&#123;<span class="string">&#x27;1&#x27;</span>:<span class="string">&#x27;上海&#x27;</span>,<span class="string">&#x27;2&#x27;</span>:<span class="string">&#x27;北京&#x27;</span>&#125;</span><br><span class="line">    school_name=school_dict[school_name]</span><br><span class="line">    school=School.School(school_name)</span><br><span class="line">    teacher_name = <span class="built_in">input</span>(<span class="string">&quot;请输入讲师姓名：&quot;</span>)</span><br><span class="line">    teacher=UserDao.UserDao.getUser(teacher_name,<span class="string">&quot;讲师&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> teacher <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请先创建讲师&quot;</span>)</span><br><span class="line">        createTeacher()</span><br><span class="line">    clazz = Clazz.Clazz(class_name,school,course,teacher)</span><br><span class="line">    <span class="comment"># 先查询有无对应校区，没有则新增</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> SchoolDao.SchoolDao.hasSchool(school_name):</span><br><span class="line">        SchoolDao.SchoolDao.insert(school)</span><br><span class="line">    <span class="comment"># 最后插入班级</span></span><br><span class="line">    ClazzDao.ClazzDao.insert(clazz)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;创建成功&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建课程</span></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;admin&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">createCource</span>():</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;请输入课程名称：&quot;</span>)</span><br><span class="line">    period = <span class="built_in">input</span>(<span class="string">&quot;请输入授课时长：&quot;</span>)</span><br><span class="line">    price = <span class="built_in">input</span>(<span class="string">&quot;请输入课程价格&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> price.isdigit():</span><br><span class="line">        price= <span class="built_in">input</span>(<span class="string">&quot;价格必须为数字&quot;</span>)</span><br><span class="line">    cource = Course.Course(name,price,period)</span><br><span class="line">    CourseDao.CourseDao.insert(cource)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;创建成功&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="student"><a href="#student" class="headerlink" title="student"></a><strong>student</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> People</span><br><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> Student</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> ClazzDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> UserDao</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils <span class="keyword">as</span> md5Utils</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> wrapper</span><br><span class="line"></span><br><span class="line">user = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line">    menulist = [<span class="string">&#x27;1. 登录&#x27;</span>, <span class="string">&#x27;2. 注册&#x27;</span>, <span class="string">&#x27;3. 退出&#x27;</span>]</span><br><span class="line">    optitos = &#123;<span class="string">&#x27;1&#x27;</span>: login, <span class="string">&#x27;2&#x27;</span>: register, <span class="string">&#x27;3&#x27;</span>: exit_sys&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;欢迎使用机蜂学园后台管理系统&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> menu <span class="keyword">in</span> menulist:</span><br><span class="line">            <span class="built_in">print</span>(menu)</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">            optitos[choice]()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入用户名：&quot;</span>)</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    user = UserDao.UserDao.get(username, password)</span><br><span class="line">    showMenu()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;请输入用户名：&quot;</span>)</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">    age = <span class="built_in">input</span>(<span class="string">&quot;请输入年龄：1-100&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;请输入性别：&quot;</span>)</span><br><span class="line">    password = md5Utils.str2md5(password)</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> age.isdigit() <span class="keyword">or</span> (<span class="built_in">int</span>(age) <span class="keyword">not</span> <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">100</span>)):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;年龄必须为整数，且在1到100之间&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> sex <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;性别必须为男或女&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> UserDao.UserDao.hasPeople(name):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;用户名已被使用,请重新注册&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    chooseClass(age, name, password, sex)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;注册成功&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chooseClass</span>(<span class="params">age, name, password, sex</span>):</span><br><span class="line">    clazz_obj = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请选择班级：&quot;</span>)</span><br><span class="line">        clazz_list = ClazzDao.ClazzDao.getList()</span><br><span class="line">        <span class="keyword">for</span> clazz <span class="keyword">in</span> clazz_list:</span><br><span class="line">            <span class="built_in">print</span>(clazz)</span><br><span class="line">        clazz_name = <span class="built_in">input</span>(<span class="string">&quot;请输入班级名称：&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> clazz <span class="keyword">in</span> clazz_list:</span><br><span class="line">            <span class="keyword">if</span> clazz.name == clazz_name:</span><br><span class="line">                clazz_obj = clazz</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> clazz_obj <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;暂无此班&quot;</span>)</span><br><span class="line"></span><br><span class="line">    p = Student.Student(name, password, sex, age, clazz_obj,role=<span class="string">&#x27;学生&#x27;</span>)</span><br><span class="line">    UserDao.UserDao.insert(p)</span><br><span class="line"></span><br><span class="line">    clazz_obj.stu_list.append(p)</span><br><span class="line">    ClazzDao.ClazzDao.insert(clazz_obj)</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit_sys</span>():</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;student&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">showMenu</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;欢迎登录机蜂学园&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1. 查看/选择班级&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;2. 缴纳学费&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;3. 退出登录&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;4. 返回&quot;</span>)</span><br><span class="line">        optitos = &#123;<span class="string">&#x27;1&#x27;</span>: showClass, <span class="string">&#x27;2&#x27;</span>: pay&#125;</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">            optitos[choice]()</span><br><span class="line">        <span class="keyword">elif</span> choice==<span class="string">&#x27;3&#x27;</span>:</span><br><span class="line">            <span class="keyword">global</span> user</span><br><span class="line">            user = <span class="literal">None</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;退出成功&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> choice == <span class="string">&#x27;4&#x27;</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;student&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">showClass</span>():</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    clazz = user.clazz</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;当前的班级为<span class="subst">&#123;clazz.name&#125;</span>&quot;</span>)</span><br><span class="line">    choice = <span class="built_in">input</span>(<span class="string">&quot;确认换班级？Y/N&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> choice.upper() == <span class="string">&#x27;Y&#x27;</span>.upper():</span><br><span class="line">        user = chooseClass(user.age, user.name, user.passwd, user.sex)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;student&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pay</span>():</span><br><span class="line">    clazz = user.clazz</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;当前的所报名的课程班级信息为<span class="subst">&#123;clazz&#125;</span>&quot;</span>)</span><br><span class="line">    choice = <span class="built_in">input</span>(<span class="string">&quot;确认缴费？Y/N&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> choice.upper() == <span class="string">&#x27;Y&#x27;</span>.upper():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;缴费<span class="subst">&#123;clazz.course.price&#125;</span>元&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="teacher"><a href="#teacher" class="headerlink" title="teacher"></a><strong>teacher</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bean <span class="keyword">import</span> People</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> UserDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> ClazzDao</span><br><span class="line"><span class="keyword">from</span> dao <span class="keyword">import</span> UserDao</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils <span class="keyword">as</span> md5Utils</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> wrapper</span><br><span class="line"></span><br><span class="line">user = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 讲师视图入口</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run</span>():</span><br><span class="line">    menulist = [<span class="string">&#x27;1. 登录&#x27;</span>, <span class="string">&#x27;2. 退出&#x27;</span>]</span><br><span class="line">    optitos = &#123;<span class="string">&#x27;1&#x27;</span>: login, <span class="string">&#x27;2&#x27;</span>: exit_sys&#125;  <span class="comment"># 利用字典模拟switch功能</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;欢迎使用机蜂学园后台管理系统&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">        <span class="keyword">for</span> menu <span class="keyword">in</span> menulist:</span><br><span class="line">            <span class="built_in">print</span>(menu)</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">            optitos[choice]()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    username = <span class="built_in">input</span>(<span class="string">&quot;请输入用户名：&quot;</span>)</span><br><span class="line">    password = <span class="built_in">input</span>(<span class="string">&quot;请输入密码：&quot;</span>)</span><br><span class="line">    <span class="keyword">global</span> user</span><br><span class="line">    user = UserDao.UserDao.get(username, password)</span><br><span class="line">    showMenu()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit_sys</span>():</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示菜单</span></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;teacher&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">showMenu</span>():</span><br><span class="line">    optitos = &#123;<span class="string">&#x27;1&#x27;</span>: chooseClass, <span class="string">&#x27;2&#x27;</span>: getStudents, <span class="string">&#x27;3&#x27;</span>: modifyScore, <span class="string">&#x27;4&#x27;</span>: exit_sys&#125;</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;欢迎登录机蜂学园后台管理系统&quot;</span>.center(<span class="number">60</span>, <span class="string">&#x27;=&#x27;</span>))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;1. 选择班级&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;2. 查看学生&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;3. 修改成绩&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;4. 退出&quot;</span>)</span><br><span class="line">        choice = <span class="built_in">input</span>(<span class="string">&quot;请选择您需要完成的操作：&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> choice <span class="keyword">in</span> optitos:</span><br><span class="line">            optitos[choice]()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;请重新选择&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择班级</span></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;teacher&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chooseClass</span>():</span><br><span class="line">    lis = ClazzDao.ClazzDao.getList()</span><br><span class="line">    <span class="keyword">for</span> clazz <span class="keyword">in</span> lis:</span><br><span class="line">        <span class="built_in">print</span>(clazz.name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请选择班级：&quot;</span>)</span><br><span class="line">    choice = <span class="built_in">input</span>()</span><br><span class="line">    <span class="built_in">print</span>(choice + <span class="string">&quot;班开始上课&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看学生列表</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;teacher&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getStudents</span>():</span><br><span class="line">    lis = ClazzDao.ClazzDao.getList()</span><br><span class="line">    <span class="keyword">for</span> clazz <span class="keyword">in</span> lis:</span><br><span class="line">        <span class="built_in">print</span>(clazz.name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请选择班级：&quot;</span>)</span><br><span class="line">    choice = <span class="built_in">input</span>()</span><br><span class="line">    clazz = ClazzDao.ClazzDao.get(choice)</span><br><span class="line">    <span class="keyword">if</span> clazz <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;该班级不存在&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(clazz.name + <span class="string">&quot;班的学生：&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> student <span class="keyword">in</span> clazz.stu_list:</span><br><span class="line">            <span class="built_in">print</span>(student)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper.login_wrapper(<span class="params"><span class="string">&quot;teacher&quot;</span></span>)</span></span><br><span class="line"><span class="comment"># 修改学生分数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">modifyScore</span>():</span><br><span class="line">    student_name = <span class="built_in">input</span>(<span class="string">&quot;请输入学生姓名：&quot;</span>)</span><br><span class="line">    user = UserDao.UserDao.getUser(student_name, <span class="string">&quot;学生&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;该学生不存在&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        score = <span class="built_in">input</span>(<span class="string">&quot;请输入分数：0-100&quot;</span>)</span><br><span class="line">        user.score = score</span><br><span class="line">        <span class="comment"># 修改学生分数时先修改学生对象的分数，与此同时还需要修改关联所在班级的学生列表</span></span><br><span class="line">        UserDao.UserDao.insert(user)</span><br><span class="line">        clazz = ClazzDao.ClazzDao.get(user.clazz.name)</span><br><span class="line">        <span class="keyword">for</span> student <span class="keyword">in</span> clazz.stu_list:</span><br><span class="line">            <span class="keyword">if</span> student.name == user.name:</span><br><span class="line">                student.score = user.score</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        ClazzDao.ClazzDao.insert(clazz)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;修改成功&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="登录装饰器"><a href="#登录装饰器" class="headerlink" title="登录装饰器"></a>登录装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录装饰器（role 代表当前登录角色）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login_wrapper</span>(<span class="params">role</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">outer</span>(<span class="params">func</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">            <span class="keyword">from</span> view <span class="keyword">import</span> admin_view <span class="keyword">as</span> admin, student_view <span class="keyword">as</span> student, teacher_view <span class="keyword">as</span> teacher</span><br><span class="line">            <span class="comment"># 导入相应模块，结合eval()内置方法判断角色登录权限</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">eval</span>(role).user:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;您尚未登录，请先登录&quot;</span>)</span><br><span class="line">                <span class="built_in">eval</span>(role).login()</span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            <span class="built_in">print</span>(role)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> inner</span><br><span class="line">    <span class="keyword">return</span> outer</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="数据访问层"><a href="#数据访问层" class="headerlink" title="数据访问层"></a>数据访问层</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils <span class="keyword">as</span> md5Utils</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserDao</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">people</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH + <span class="string">&#x27;user\\&#x27;</span>, people.name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pickle.dump(people, f)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 登录验证</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">name, password</span>):</span><br><span class="line">        <span class="keyword">if</span> UserDao.hasPeople(name):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH + <span class="string">&#x27;user\\&#x27;</span>, name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                p = pickle.load(f)</span><br><span class="line">                <span class="keyword">if</span> p.passwd == md5Utils.str2md5(password):</span><br><span class="line">                    <span class="keyword">return</span> p</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据姓名和角色获取用户信息</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getUser</span>(<span class="params">name, role</span>):</span><br><span class="line">        <span class="keyword">if</span> UserDao.hasPeople(name):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH + <span class="string">&#x27;user\\&#x27;</span>, name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                p = pickle.load(f)</span><br><span class="line">                <span class="keyword">if</span> role == p.role:</span><br><span class="line">                    <span class="keyword">return</span> p</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hasPeople</span>(<span class="params">username</span>):</span><br><span class="line">        <span class="keyword">return</span> os.path.exists(os.path.join(settings.BASE_DATA_PATH + <span class="string">&quot;user\\&quot;</span>, username + <span class="string">&quot;.db&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SchoolDao</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">school</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+ <span class="string">&quot;school\\&quot;</span>, school.name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pickle.dump(school, f)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">if</span> SchoolDao.hasSchool(name):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+<span class="string">&quot;school\\&quot;</span>, name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                c= pickle.load(f)</span><br><span class="line">                <span class="keyword">return</span> c</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hasSchool</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">return</span> os.path.exists(os.path.join(settings.BASE_DATA_PATH+<span class="string">&#x27;school\\&#x27;</span>, name + <span class="string">&quot;.db&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> md5_utils <span class="keyword">as</span> md5Utils</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CourseDao</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">course</span>):</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+ <span class="string">&quot;course\\&quot;</span>, course.name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pickle.dump(course, f)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">if</span> CourseDao.hasCourse(name):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+<span class="string">&quot;course\\&quot;</span>, name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                c= pickle.load(f)</span><br><span class="line">                <span class="keyword">return</span> c</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hasCourse</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">return</span> os.path.exists(os.path.join(settings.BASE_DATA_PATH+<span class="string">&#x27;course\\&#x27;</span>, name + <span class="string">&quot;.db&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ClazzDao</span>:</span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">clazz</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+ <span class="string">&quot;clazz\\&quot;</span>, clazz.name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pickle.dump(clazz, f)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="comment"># 获取班级列表</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getList</span>():</span><br><span class="line">        <span class="built_in">list</span> = []</span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(settings.BASE_DATA_PATH + <span class="string">&quot;clazz\\&quot;</span>):</span><br><span class="line">            <span class="keyword">if</span> file.endswith(<span class="string">&quot;.db&quot;</span>):</span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH + <span class="string">&quot;clazz\\&quot;</span>, file), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                    c = pickle.load(f)</span><br><span class="line">                    <span class="built_in">list</span>.append(c)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">if</span> ClazzDao.hasClazz(name):</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(settings.BASE_DATA_PATH+<span class="string">&quot;clazz\\&quot;</span>, name + <span class="string">&quot;.db&quot;</span>), <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                c= pickle.load(f)</span><br><span class="line">                <span class="keyword">return</span> c</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">hasClazz</span>(<span class="params">name</span>):</span><br><span class="line">        <span class="keyword">return</span> os.path.exists(os.path.join(settings.BASE_DATA_PATH+<span class="string">&#x27;clazz\\&#x27;</span>, name + <span class="string">&quot;.db&quot;</span>))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在此项目中，需要理清班级-&gt;学生（一对多）采用列表存储班级学生；教师——&gt;课程（一对多）课程绑定教师，学校-&gt;班级（一对多）课程-&gt;班级（一对多）的组合关系，同时注意将教师，管理员，学生共有属性提取成people父类（单继承关系）完成对象模型设计</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://david3901093.github.io/hexo.github.io/2024/02/16/python/day12/" title="教务管理系统" target="_blank" rel="external">https://david3901093.github.io/hexo.github.io/2024/02/16/python/day12/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/david3901093.github.io" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/hexo.github.io/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/david3901093.github.io" target="_blank"><span class="text-dark">秋天的怀念</span><small class="ml-1x">Java 程序员 &amp; Teacher</small></a></h3>
+        <div>会写点小文章的程序员。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/hexo.github.io/2024/02/16/python/Python%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="Python命名规范"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn   collapsed  " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="qq,wechat,qqzone,weibo" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/hexo.github.io/js/plugin.min.js"></script>
+
+
+<script src="/hexo.github.io/js/application.js"></script>
+
+
+
+    <script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:david3901093.github.io/hexo.github.io ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '7b983dbe11c92bd3e3c6',
+    clientSecret: '4e6afef671c6cf51be01b5fe66e0c2f1e0c07a62',
+    repo: 'hexo.github.io',
+    owner: 'David3901093',
+    admin: ['David3901093'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: 'true',
+    proxy:"https://proxy-gitalk-api.netlify.app/github_access_token"
+
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
